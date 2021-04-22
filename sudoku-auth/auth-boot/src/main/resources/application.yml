@@ -44,3 +44,18 @@ common:
     response: false
   core:
     projectPackage: 'com.zumin.sudoku.game'
+
+#验证码配置
+captcha:
+  #长度
+  width: 112
+  #宽度
+  height: 36
+  #字符个数
+  codeNumber: 4
+  #干扰线个数
+  lineCount: 100
+  #有效期
+  expireTime: 5
+  #是否验证码
+  enabled: true

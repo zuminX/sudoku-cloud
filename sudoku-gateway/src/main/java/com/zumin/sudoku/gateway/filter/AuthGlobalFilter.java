@@ -54,7 +54,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     String payload = jwsObject.getPayload().toString();
     JSONObject jsonObject = JSONUtil.parseObj(payload);
     String jti = jsonObject.getStr(AuthConstants.JWT_JTI);
-    boolean isBlack = redisUtils.has(AuthConstants.TOKEN_BLACKLIST_PREFIX + jti);
+    boolean isBlack = redisUtils.has(AuthRedisKey.TOKEN_BLACKLIST_PREFIX + jti);
     if (isBlack) {
       return GatewayUtils.writeFailedToResponse(response, AuthStatusCode.TOKEN_ACCESS_FORBIDDEN);
     }

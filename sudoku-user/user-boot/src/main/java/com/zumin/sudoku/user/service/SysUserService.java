@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zumin.sudoku.auth.feign.AuthFeign;
 import com.zumin.sudoku.auth.pojo.dto.OAuth2TokenDTO;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.constant.AuthParamName;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.user.mapper.SysUserMapper;
 import com.zumin.sudoku.user.pojo.body.LoginBody;
@@ -31,11 +32,13 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
    */
   public CommonResult<OAuth2TokenDTO> login(LoginBody loginBody) {
     Map<String, String> params = new HashMap<>();
-    params.put("client_id", AuthConstants.USER_CLIENT_ID);
-    params.put("client_secret", clientSecret);
-    params.put("grant_type", "password");
-    params.put("username", loginBody.getUsername());
-    params.put("password", loginBody.getPassword());
+    params.put(AuthParamName.CLIENT_ID, AuthConstants.USER_CLIENT_ID);
+    params.put(AuthParamName.CLIENT_SECRET, clientSecret);
+    params.put(AuthParamName.GRANT_TYPE, "password");
+    params.put(AuthParamName.USERNAME, loginBody.getUsername());
+    params.put(AuthParamName.PASSWORD, loginBody.getPassword());
+    params.put(AuthParamName.CAPTCHA_UUID, loginBody.getUuid());
+    params.put(AuthParamName.CAPTCHA_CODE, loginBody.getCode());
     return authFeign.postAccessToken(params);
   }
 }

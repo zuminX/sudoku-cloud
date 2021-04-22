@@ -5,6 +5,7 @@ import com.zumin.sudoku.auth.filter.CustomClientCredentialsTokenEndpointFilter;
 import com.zumin.sudoku.auth.service.JdbcClientDetailsServiceImpl;
 import com.zumin.sudoku.auth.service.UserDetailsServiceImpl;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.constant.AuthParamName;
 import com.zumin.sudoku.common.core.enums.AuthStatusCode;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.core.utils.ServletUtils;
@@ -129,9 +130,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     return (accessToken, authentication) -> {
       Map<String, Object> map = new HashMap<>(8);
       User user = (User) authentication.getUserAuthentication().getPrincipal();
-      map.put(AuthConstants.USER_ID_KEY, user.getId());
-      map.put(AuthConstants.CLIENT_ID_KEY, user.getClientId());
-      map.put(AuthConstants.USER_NAME_KEY, user.getUsername());
+      map.put(AuthParamName.USER_ID, user.getId());
+      map.put(AuthParamName.CLIENT_ID, user.getClientId());
+      map.put(AuthParamName.USERNAME, user.getUsername());
       ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);
       return accessToken;
     };

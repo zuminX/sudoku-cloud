@@ -4,62 +4,80 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.zumin.sudoku.common.core.utils.ServletUtils;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.constant.AuthParamName;
+import com.zumin.sudoku.common.core.utils.ServletUtils;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import lombok.experimental.UtilityClass;
 import org.apache.logging.log4j.util.Strings;
 
-@Slf4j
+@UtilityClass
 public class SecurityUtils {
 
-  public static JSONObject getJwtPayload() {
+  /**
+   * 获取JWT载荷
+   *
+   * @return JSON对象
+   */
+  public JSONObject getJwtPayload() {
     String jwtPayload = ServletUtils.getRequest().getHeader(AuthConstants.JWT_PAYLOAD_KEY);
     return JSONUtil.parseObj(jwtPayload);
   }
 
-  public static Long getUserId() {
-    return getJwtPayload().getLong(AuthConstants.USER_ID_KEY);
-  }
-
-
-  public static String getUsername() {
-    return getJwtPayload().getStr(AuthConstants.USER_NAME_KEY);
+  /**
+   * 获取当前用户的用户ID
+   *
+   * @return 用户ID
+   */
+  public Long getUserId() {
+    return getJwtPayload().getLong(AuthParamName.USER_ID);
   }
 
   /**
-   * 获取JWT的载体中的clientId
+   * 获取当前用户的用户名
    *
-   * @return
+   * @return 用户名
    */
-  public static String getClientId() {
-    return getJwtPayload().getStr(AuthConstants.CLIENT_ID_KEY);
+  public String getUsername() {
+    return getJwtPayload().getStr(AuthParamName.USERNAME);
+  }
+
+  /**
+   * 获取ClientId
+   *
+   * @return 客户端ID
+   */
+  public String getClientId() {
+    return getJwtPayload().getStr(AuthParamName.CLIENT_ID);
+  }
+
+  /**
+   * 获取当前用户的角色ID
+   *
+   * @return 角色ID
+   */
+  public Set<Long> getRoleIds() {
+    Set<String> set = getJwtPayload().get(AuthConstants.JWT_AUTHORITIES_KEY, Set.class);
+    return set.stream().map(Long::valueOf).collect(Collectors.toSet());
   }
 
   /**
    * 获取登录认证的客户端ID
-   * <p>
-   * 兼容两种方式获取Oauth2客户端信息（client_id、client_secret） 方式一：client_id、client_secret放在请求路径中 方式二：放在请求头（Request Headers）中的Authorization字段，且经过加密，例如 Basic
-   * Y2xpZW50OnNlY3JldA== 明文等于 client:secret
    *
-   * @return
+   * @return 客户端ID
    */
   @SneakyThrows
-  public static String getAuthClientId() {
-    String clientId;
-
+  public String getAuthClientId() {
     HttpServletRequest request = ServletUtils.getRequest();
-
     // 从请求路径中获取
-    clientId = request.getParameter(AuthConstants.CLIENT_ID_KEY);
+    String clientId = request.getParameter(AuthParamName.CLIENT_ID);
     if (StrUtil.isNotBlank(clientId)) {
       return clientId;
     }
-
     // 从请求头获取
     String basic = request.getHeader(AuthConstants.AUTHORIZATION_KEY);
     if (StrUtil.isNotBlank(basic) && basic.startsWith(AuthConstants.BASIC_PREFIX)) {
@@ -70,9 +88,4 @@ public class SecurityUtils {
     return clientId;
   }
 
-
-  public static List<Long> getRoleIds() {
-    List<String> list = getJwtPayload().get(AuthConstants.JWT_AUTHORITIES_KEY, List.class);
-    return list.stream().map(Long::valueOf).collect(Collectors.toList());
-  }
 }

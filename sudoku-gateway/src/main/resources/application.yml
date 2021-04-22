@@ -49,6 +49,7 @@ spring:
 white-list:
   urls:
     - "/auth/oauth/token"
+    - "/auth/captcha/captchaImage"
     - "/user/security/login"
     - "/user/security/register"
 

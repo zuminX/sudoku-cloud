@@ -1,5 +1,8 @@
 package com.zumin.sudoku.common.core.constant;
 
+/**
+ * 认证常量类
+ */
 public interface AuthConstants {
 
   /**
@@ -32,16 +35,6 @@ public interface AuthConstants {
    */
   String JWT_EXP = "exp";
 
-  /**
-   * Redis缓存权限规则key
-   */
-  String RESOURCE_ROLES_KEY = "auth:resource:roles";
-
-  /**
-   * 黑名单token前缀
-   */
-  String TOKEN_BLACKLIST_PREFIX = "auth:token:blacklist:";
-
   String CLIENT_DETAILS_FIELDS = "client_id, CONCAT('{noop}',client_secret) as client_secret, resource_ids, scope, "
       + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
       + "refresh_token_validity, additional_information, autoapprove";
@@ -56,12 +49,6 @@ public interface AuthConstants {
    * 密码加密方式
    */
   String BCRYPT = "{bcrypt}";
-
-  String USER_ID_KEY = "user_id";
-
-  String USER_NAME_KEY = "username";
-
-  String CLIENT_ID_KEY = "client_id";
 
   /**
    * JWT存储权限前缀
@@ -85,7 +72,8 @@ public interface AuthConstants {
 
   String LOGOUT_PATH = "/sudoku-auth/oauth/logout";
 
-  String GRANT_TYPE_KEY = "grant_type";
-
-  String REFRESH_TOKEN = "refresh_token";
+  /**
+   * Redis缓存权限规则key
+   */
+  String RESOURCE_ROLES_KEY = "auth:resource:roles";
 }

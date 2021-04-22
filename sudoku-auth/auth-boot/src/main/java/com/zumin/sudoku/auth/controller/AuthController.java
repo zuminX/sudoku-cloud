@@ -1,7 +1,9 @@
 package com.zumin.sudoku.auth.controller;
 
 import com.zumin.sudoku.auth.pojo.dto.OAuth2TokenDTO;
+import com.zumin.sudoku.auth.service.CaptchaService;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.constant.AuthParamName;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.web.annotation.ComRestController;
 import com.zumin.sudoku.common.web.utils.SecurityUtils;
@@ -24,6 +26,8 @@ public class AuthController {
 
   private final TokenEndpoint tokenEndpoint;
 
+  private final CaptchaService captchaService;
+
   @ApiOperation(value = "OAuth2认证", notes = "login")
   @ApiImplicitParams({
       @ApiImplicitParam(name = "grant_type", defaultValue = "password", value = "授权模式", required = true),
@@ -32,9 +36,6 @@ public class AuthController {
       @ApiImplicitParam(name = "refresh_token", value = "刷新token"),
       @ApiImplicitParam(name = "username", defaultValue = "admin", value = "登录用户名"),
       @ApiImplicitParam(name = "password", defaultValue = "123456", value = "登录密码"),
-      @ApiImplicitParam(name = "code", value = "小程序授权code"),
-      @ApiImplicitParam(name = "encryptedData", value = "包括敏感数据在内的完整用户信息的加密数据"),
-      @ApiImplicitParam(name = "iv", value = "加密算法的初始向量"),
   })
   @PostMapping("/token")
   public CommonResult<OAuth2TokenDTO> postAccessToken(@ApiIgnore Principal principal, @ApiIgnore @RequestParam Map<String, String> parameters
@@ -45,7 +46,7 @@ public class AuthController {
       case AuthConstants.WEAPP_CLIENT_ID:  // 微信认证
         throw new UnsupportedOperationException("暂不支持微信");
       default:
-        oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
+        oAuth2AccessToken = handlerForSystem(principal, parameters);
         break;
     }
     OAuth2TokenDTO auth2TokenDTO = OAuth2TokenDTO.builder()
@@ -56,5 +57,16 @@ public class AuthController {
     return CommonResult.success(auth2TokenDTO);
   }
 
+  /**
+   * 处理系统用户
+   *
+   * @return Token信息
+   */
+  private OAuth2AccessToken handlerForSystem(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+    String uuid = parameters.get(AuthParamName.CAPTCHA_UUID);
+    String code = parameters.get(AuthParamName.CAPTCHA_CODE);
+    captchaService.checkCaptcha(uuid, code);
+    return tokenEndpoint.postAccessToken(principal, parameters).getBody();
+  }
 
 }

@@ -22,6 +22,10 @@ public enum AuthStatusCode implements StatusCode {
 
   CLIENT_AUTHENTICATION_FAILED(30, "客户端认证失败"),
   ACCESS_UNAUTHORIZED(31, "访问未授权"),
+
+  CAPTCHA_ERROR(50, "生成验证码时发生错误"),
+  CAPTCHA_EXPIRED(51, "验证码过期，请重新生成验证码"),
+  CAPTCHA_NOT_EQUALS(52, "验证码错误，请重新生成验证码"),
   ;
 
   /**

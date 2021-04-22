@@ -1,6 +1,7 @@
 package com.zumin.sudoku.auth.controller;
 
 import cn.hutool.json.JSONObject;
+import com.zumin.sudoku.auth.constants.AuthRedisKey;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.redis.utils.RedisUtils;
@@ -28,7 +29,7 @@ public class LogoutController {
     long currentTimeSeconds = System.currentTimeMillis() / 1000;
     // token已过期，无需加入黑名单
     if (exp >= currentTimeSeconds) {
-      redisUtils.set(AuthConstants.TOKEN_BLACKLIST_PREFIX + jti, "", (exp - currentTimeSeconds), TimeUnit.SECONDS);
+      redisUtils.set(AuthRedisKey.TOKEN_BLACKLIST_PREFIX + jti, "", (exp - currentTimeSeconds), TimeUnit.SECONDS);
     }
     return CommonResult.success();
   }

@@ -30,4 +30,13 @@ public class LoginBody implements Serializable {
   @Pattern(regexp = "^[0-9a-zA-Z]+$", message = "密码只能是数字和字母的组合")
   private String password;
 
+  @ApiModelProperty(value = "验证码", required = true)
+  @NotEmpty(message = "验证码不能为空")
+  @Length(min = 4, max = 4, message = "验证码必须为4位")
+  @Pattern(regexp = "^[0-9a-zA-Z]+$", message = "验证码只能是数字和字母的组合")
+  private String code;
+
+  @ApiModelProperty(value = "唯一标识", required = true)
+  @NotEmpty(message = "唯一标识不能为空")
+  private String uuid;
 }
