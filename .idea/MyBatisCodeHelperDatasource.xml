@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="generateService" value="true" />
+        <option name="javaMapperPackage" value="com.zumin.sudoku.game.mapper" />
+        <option name="javaMapperPath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/java" />
+        <option name="javaModelPackage" value="com.zumin.sudoku.game.pojo.entity" />
+        <option name="javaModelPath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="game-api" />
+        <option name="lombokDataAnnotation" value="true" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="game-api">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.zumin.sudoku.game.mapper" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/java" />
+                  <option name="javaModelPacakge" value="com.zumin.sudoku.game.pojo.entity" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/java" />
+                  <option name="javaServicePackage" value="com.zumin.sudoku.game.service" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/java" />
+                  <option name="xmlPackage" value="mapperxml" />
+                  <option name="xmlPath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+            <entry key="user-api">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.zumin.sudoku.user.mapper" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/sudoku-user/user-api/src/main/java" />
+                  <option name="javaModelPacakge" value="com.zumin.sudoku.user.pojo.entity" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/sudoku-user/user-api/src/main/java" />
+                  <option name="javaServiceInterfacePath" value="$PROJECT_DIR$/sudoku-user/user-api/src/main/java" />
+                  <option name="javaServicePackage" value="com.zumin.sudoku.user.service" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/sudoku-user/user-api/src/main/java" />
+                  <option name="xmlPackage" value="mapperxml" />
+                  <option name="xmlPath" value="D:\Learn\Java\sudoku-cloud\sudoku-user\user-api\src\main\resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="mybatisPlusIdType" value="AUTO" />
+        <option name="mybatisPlusStaticField" value="false" />
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="sudoku_cloud:game_level">
+              <value>
+                <TableGenerateConfig>
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="min_empty" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                      <MyColumnOverride>
+                        <option name="columnName" value="max_empty" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="GameLevel" />
+                  <option name="moduleName" value="game-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:game_normal_record">
+              <value>
+                <TableGenerateConfig>
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="situation" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="GameNormalRecord" />
+                  <option name="moduleName" value="game-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:game_race_information">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="GameRaceInformation" />
+                  <option name="moduleName" value="game-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:game_race_record">
+              <value>
+                <TableGenerateConfig>
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="situation" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="GameRaceRecord" />
+                  <option name="moduleName" value="game-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:game_record">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="GameRecord" />
+                  <option name="moduleName" value="game-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:oauth_client_details">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
+                  <option name="javaModelName" value="OauthClientDetails" />
+                  <option name="moduleName" value="user-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:sys_resource">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="SysResource" />
+                  <option name="moduleName" value="user-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:sys_resource_role">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="SysResourceRole" />
+                  <option name="moduleName" value="user-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:sys_role">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="SysRole" />
+                  <option name="moduleName" value="user-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:sys_user">
+              <value>
+                <TableGenerateConfig>
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="enabled" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="SysUser" />
+                  <option name="moduleName" value="user-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="sudoku_cloud:sys_user_role">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="SysUserRole" />
+                  <option name="moduleName" value="user-api" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="useSwagger" value="true" />
+        <option name="userMybatisPlus" value="true" />
+        <option name="xmlMapperPackage" value="mapperxml" />
+        <option name="xmlMapperPath" value="$PROJECT_DIR$/sudoku-game/game-api/src/main/resources" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zumin.sudoku</groupId>
+  <artifactId>sudoku-cloud</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.10.RELEASE</version>
+    <relativePath/>
+  </parent>
+
+  <modules>
+    <module>sudoku-common</module>
+    <module>sudoku-gateway</module>
+    <module>sudoku-user</module>
+    <module>sudoku-auth</module>
+    <module>sudoku-game</module>
+    <module>sudoku-auth/untitled</module>
+    <module>sudoku-admin</module>
+  </modules>
+
+  <properties>
+    <java.version>11</java.version>
+    <sudoku.version>1.0.0</sudoku.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
+    <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+    <mapstruct.version>1.4.1.Final</mapstruct.version>
+    <lombok.version>1.18.12</lombok.version>
+    <knife4j-micro.version>2.0.4</knife4j-micro.version>
+    <knife4j.version>2.0.8</knife4j.version>
+    <hutool.version>5.4.3</hutool.version>
+    <maven-surefire.version>2.22.2</maven-surefire.version>
+    <maven-compiler.version>3.8.1</maven-compiler.version>
+    <xxl-job-core.version>2.2.0</xxl-job-core.version>
+    <powermock.version>2.0.2</powermock.version>
+    <junit.version>4.13.1</junit.version>
+    <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+    <mockito-core.version>3.6.0</mockito-core.version>
+    <spring-boot-maven-plugin.version>2.3.3.RELEASE</spring-boot-maven-plugin.version>
+    <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
+  </properties>
+
+
+  <dependencies>
+    <!-- SpringBoot 测试 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-boot-starter</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <!-- 排除Junit 5相关的依赖 -->
+        <exclusion>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-junit-jupiter</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Junit 4 -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Mockito 核心 -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- PowerMockito -->
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito2</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- lombok 注解插件 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- hutool 工具集-->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>${hutool.version}</version>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--Spring Cloud 相关依赖-->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!--Spring Cloud Alibaba 相关依赖-->
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+        <version>${spring-cloud-alibaba.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- 工具模块 -->
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>common-core</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>common-mybatis</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>common-redis</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>common-web</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>user-api</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>auth-api</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.zumin.sudoku</groupId>
+        <artifactId>admin-api</artifactId>
+        <version>${sudoku.version}</version>
+      </dependency>
+
+      <!-- 类型转换工具 -->
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+
+      <!-- Spring Boot 应用监控工具客户端 -->
+      <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-starter-client</artifactId>
+        <version>${spring-boot-admin.version}</version>
+      </dependency>
+
+      <!-- swagger 文档 -->
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+        <version>${knife4j-micro.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-spring-boot-starter</artifactId>
+        <version>${knife4j.version}</version>
+      </dependency>
+
+      <!-- hutool 工具集-->
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
+      <!-- xxl-job 任务调度平台 -->
+      <dependency>
+        <groupId>com.xuxueli</groupId>
+        <artifactId>xxl-job-core</artifactId>
+        <version>${xxl-job-core.version}</version>
+      </dependency>
+
+      <!--Token生成与解析-->
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>${nimbus-jose-jwt.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>

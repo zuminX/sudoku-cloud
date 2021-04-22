@@ -1,0 +1,8 @@
+# Project exclude paths
+/sudoku-admin/admin-api/target/
+/sudoku-common/common-core/target/
+/sudoku-common/common-mybatis/target/
+/sudoku-common/common-redis/target/
+/sudoku-common/common-web/target/
+/sudoku-game/game-api/target/
+/sudoku-user/user-api/target/

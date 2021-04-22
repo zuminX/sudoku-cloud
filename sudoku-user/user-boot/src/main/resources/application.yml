@@ -1,0 +1,48 @@
+server:
+  port: 8100
+
+spring:
+  application:
+    name: sudoku-user
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+
+  #redis配置
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    password:
+
+  #数据库配置
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/sudoku_cloud?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+
+#mybatis配置
+mybatis-plus:
+  mapper-locations: classpath:mapperxml/*.xml
+  configuration:
+    use-generated-keys: true
+
+auth:
+  client-secret: 2233qqaazz
+
+common:
+  core:
+    projectPackage: 'com.zumin.sudoku.user'

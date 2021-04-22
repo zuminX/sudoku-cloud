@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zumin.sudoku.game.mapper.GameNormalRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zumin.sudoku.game.pojo.entity.GameNormalRecord">
+    <!--@mbg.generated-->
+    <!--@Table game_normal_record-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="answer" jdbcType="CHAR" property="answer" />
+    <result column="situation" jdbcType="TINYINT" property="situation" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="record_id" jdbcType="BIGINT" property="recordId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, answer, situation, user_id, record_id
+  </sql>
+</mapper>

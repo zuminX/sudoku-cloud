@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common-mybatis" />
+        <module name="user-api" />
+        <module name="game-api" />
+        <module name="sudoku-gateway" />
+        <module name="admin-api" />
+        <module name="auth-api" />
+        <module name="common-web" />
+        <module name="common-redis" />
+        <module name="auth-boot" />
+        <module name="game-boot" />
+        <module name="common-core" />
+      </profile>
+      <profile name="Annotation profile for sudoku-cloud" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="mapstruct.defaultComponentModel" value="spring" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../../Software/Develop/Apache/mavenRes/org/mapstruct/mapstruct-processor/1.4.1.Final/mapstruct-processor-1.4.1.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../../Software/Develop/Apache/mavenRes/org/mapstruct/mapstruct/1.4.1.Final/mapstruct-1.4.1.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../../Software/Develop/Apache/mavenRes/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar" />
+        </processorPath>
+        <module name="user-boot" />
+        <module name="admin-boot" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin-api" options="-parameters" />
+      <module name="admin-boot" options="-parameters -Amapstruct.defaultComponentModel=spring" />
+      <module name="auth-api" options="-parameters" />
+      <module name="auth-boot" options="-parameters" />
+      <module name="common-core" options="-parameters" />
+      <module name="common-mybatis" options="-parameters" />
+      <module name="common-redis" options="-parameters" />
+      <module name="common-web" options="-parameters" />
+      <module name="game-api" options="-parameters" />
+      <module name="game-boot" options="-parameters" />
+      <module name="sudoku-auth" options="" />
+      <module name="sudoku-common" options="" />
+      <module name="sudoku-game" options="" />
+      <module name="sudoku-gateway" options="-parameters" />
+      <module name="sudoku-user" options="" />
+      <module name="user-api" options="-parameters" />
+      <module name="user-boot" options="-parameters -Amapstruct.defaultComponentModel=spring" />
+    </option>
+  </component>
+</project>
