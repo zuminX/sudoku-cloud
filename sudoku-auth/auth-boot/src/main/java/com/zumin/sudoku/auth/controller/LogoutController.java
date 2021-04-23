@@ -1,7 +1,7 @@
 package com.zumin.sudoku.auth.controller;
 
 import cn.hutool.json.JSONObject;
-import com.zumin.sudoku.auth.constants.AuthRedisKey;
+import com.zumin.sudoku.common.core.constant.AuthRedisKey;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.redis.utils.RedisUtils;

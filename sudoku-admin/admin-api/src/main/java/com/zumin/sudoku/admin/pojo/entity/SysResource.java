@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import lombok.Data;
 
-@ApiModel(value = "com-zumin-sudoku-user-pojo-entity-SysResource")
+@ApiModel(value = "com-zumin-sudoku-ums-pojo-entity-SysResource")
 @Data
 @TableName(value = "sys_resource")
 public class SysResource {

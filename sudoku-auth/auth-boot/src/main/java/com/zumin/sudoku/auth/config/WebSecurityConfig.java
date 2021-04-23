@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests().requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
         .and()
-        .authorizeRequests().antMatchers("/getPublicKey", "/oauth/logout", "/captcha/captchaImage").permitAll()
+        .authorizeRequests().antMatchers("/getPublicKey", "/oauth/logout", "/captcha/captchaImage","/captcha/check").permitAll()
         .antMatchers("/webjars/**", "/doc.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
         .anyRequest().authenticated()
         .and()
@@ -41,15 +41,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
-
-  /**
-   * 设置密码编码器
-   *
-   * @return 密码编码器
-   */
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-  }
-
 }

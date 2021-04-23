@@ -63,7 +63,7 @@ public interface AuthConstants {
   /**
    * 数独系统用户客户端ID
    */
-  String USER_CLIENT_ID = "sudoku-user";
+  String USER_CLIENT_ID = "sudoku-ums";
 
   /**
    * 数独系统微信小程序客户端ID

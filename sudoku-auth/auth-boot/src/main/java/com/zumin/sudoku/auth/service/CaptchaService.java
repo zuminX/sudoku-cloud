@@ -3,7 +3,7 @@ package com.zumin.sudoku.auth.service;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.lang.UUID;
-import com.zumin.sudoku.auth.constants.AuthRedisKey;
+import com.zumin.sudoku.common.core.constant.AuthRedisKey;
 import com.zumin.sudoku.auth.exception.CaptchaException;
 import com.zumin.sudoku.auth.pojo.vo.CaptchaVO;
 import com.zumin.sudoku.common.core.enums.AuthStatusCode;

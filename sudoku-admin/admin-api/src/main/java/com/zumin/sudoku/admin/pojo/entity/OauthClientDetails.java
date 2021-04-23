@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel(value = "com-zumin-sudoku-user-pojo-entity-OauthClientDetails")
+@ApiModel(value = "com-zumin-sudoku-ums-pojo-entity-OauthClientDetails")
 @Data
 @TableName(value = "oauth_client_details")
 public class OauthClientDetails {

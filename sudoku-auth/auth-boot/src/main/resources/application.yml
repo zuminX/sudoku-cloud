@@ -40,7 +40,6 @@ management:
 common:
   web:
     data-binding: false
-    exception-handler: false
     response: false
   core:
     projectPackage: 'com.zumin.sudoku.game'

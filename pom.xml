@@ -19,10 +19,10 @@
   <modules>
     <module>sudoku-common</module>
     <module>sudoku-gateway</module>
-    <module>sudoku-user</module>
+    <module>sudoku-ums</module>
     <module>sudoku-auth</module>
     <module>sudoku-game</module>
-    <module>sudoku-auth/untitled</module>
+    <module>sudoku-auth</module>
     <module>sudoku-admin</module>
   </modules>
 
@@ -168,7 +168,7 @@
 
       <dependency>
         <groupId>com.zumin.sudoku</groupId>
-        <artifactId>user-api</artifactId>
+        <artifactId>ums-api</artifactId>
         <version>${sudoku.version}</version>
       </dependency>
 

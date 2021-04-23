@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
 
-@ApiModel(value = "com-zumin-sudoku-user-pojo-entity-SysUser")
+@ApiModel(value = "com-zumin-sudoku-ums-pojo-entity-SysUser")
 @Data
 @TableName(value = "sys_user")
 public class SysUser {
@@ -72,5 +72,5 @@ public class SysUser {
   private Integer enabled;
 
   @TableField(exist = false)
-  private List<Long> roleIds;
+  private List<SysRole> roleList;
 }

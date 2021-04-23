@@ -24,10 +24,10 @@ spring:
             - Path=/admin/**
           filters:
             - StripPrefix=1
-        - id: sudoku-user-route
-          uri: lb://sudoku-user
+        - id: sudoku-ums-route
+          uri: lb://sudoku-ums
           predicates:
-            - Path=/user/**
+            - Path=/ums/**
           filters:
             - StripPrefix=1
       discovery:
@@ -50,8 +50,8 @@ white-list:
   urls:
     - "/auth/oauth/token"
     - "/auth/captcha/captchaImage"
-    - "/user/security/login"
-    - "/user/security/register"
+    - "/ums/security/login"
+    - "/ums/security/register"
 
 common:
   core:

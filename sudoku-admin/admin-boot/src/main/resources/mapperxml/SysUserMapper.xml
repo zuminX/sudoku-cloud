@@ -4,17 +4,46 @@
   <resultMap id="BaseResultMap" type="com.zumin.sudoku.admin.pojo.entity.SysUser">
     <!--@mbg.generated-->
     <!--@Table sys_user-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="recent_login_time" jdbcType="TIMESTAMP" property="recentLoginTime" />
-    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+    <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="recent_login_time" jdbcType="TIMESTAMP" property="recentLoginTime"/>
+    <result column="enabled" jdbcType="TINYINT" property="enabled"/>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, username, `password`, nickname, avatar, create_time, recent_login_time, enabled
   </sql>
+
+  <resultMap extends="BaseResultMap" id="UserWithRole" type="com.zumin.sudoku.admin.pojo.entity.SysUser">
+    <collection ofType="com.zumin.sudoku.admin.pojo.entity.SysRole" property="roleList">
+      <id column="role_id" property="id"/>
+      <result column="role_name" property="name"/>
+      <result column="role_nickname" property="nickname"/>
+    </collection>
+  </resultMap>
+
+  <select id="countNewUserByDateBetween" resultType="java.lang.Integer">
+    select count(1)
+    from sys_user
+    where DATE(`create_time`) <![CDATA[>=]]> DATE(#{startDate,jdbcType=DATE})
+      and DATE(`create_time`) <![CDATA[<]]> DATE(#{endDate,jdbcType=DATE})
+  </select>
+
+  <select id="countRecentLoginUserByDateBetween" resultType="java.lang.Integer">
+    select count(1)
+    from sys_user
+    where DATE(`recent_login_time`) <![CDATA[>=]]> DATE(#{startDate,jdbcType=DATE})
+      and DATE(`recent_login_time`) <![CDATA[<]]> DATE(#{endDate,jdbcType=DATE})
+  </select>
+
+  <select id="selectWithRoleByUsername" resultMap="UserWithRole">
+    select u.*, r.id as role_id, r.name as role_name, r.nickname as role_nickname
+    from sys_user u
+           inner join sys_user_role ur on u.id = ur.user_id
+           inner join sys_role r on ur.role_id = r.id
+  </select>
 </mapper>

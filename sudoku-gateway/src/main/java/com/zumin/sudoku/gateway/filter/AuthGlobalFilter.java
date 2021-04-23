@@ -5,6 +5,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nimbusds.jose.JWSObject;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.constant.AuthRedisKey;
 import com.zumin.sudoku.common.core.enums.AuthStatusCode;
 import com.zumin.sudoku.common.redis.utils.RedisUtils;
 import com.zumin.sudoku.gateway.utils.GatewayUtils;

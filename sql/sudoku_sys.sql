@@ -23,7 +23,7 @@ CREATE TABLE `oauth_client_details`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `oauth_client_details`
-VALUES ('sudoku-user', '', '2233qqaazz', 'all', 'password,client_credentials,refresh_token,
+VALUES ('sudoku-ums', '', '2233qqaazz', 'all', 'password,client_credentials,refresh_token,
 authorization_code', '', NULL, 3600, 7200, NULL, 'true');
 
 DROP TABLE IF EXISTS `sys_user`;
@@ -31,7 +31,7 @@ CREATE TABLE `sys_user`
 (
     `id`                bigint AUTO_INCREMENT COMMENT '用户ID',
     `username`          varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户名',
-    `password`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
+    `password`          varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
     `nickname`          varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '昵称',
     `avatar`            varchar(128) DEFAULT NULL COMMENT '头像地址',
     `create_time`       datetime     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

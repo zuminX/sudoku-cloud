@@ -66,6 +66,11 @@
       <artifactId>feign-okhttp</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+    </dependency>
+
     <!-- 解决部署到Linux中出现NoClassDefFoundError: javax/xml/bind/DatatypeConverter的异常 -->
     <dependency>
       <groupId>javax.xml.bind</groupId>

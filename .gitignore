@@ -5,4 +5,4 @@
 /sudoku-common/common-redis/target/
 /sudoku-common/common-web/target/
 /sudoku-game/game-api/target/
-/sudoku-user/user-api/target/
+/sudoku-ums/ums-api/target/

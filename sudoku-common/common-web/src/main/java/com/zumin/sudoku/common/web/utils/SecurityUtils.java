@@ -2,6 +2,7 @@ package com.zumin.sudoku.common.web.utils;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.zumin.sudoku.common.core.constant.AuthConstants;
@@ -14,9 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @UtilityClass
 public class SecurityUtils {
+
+  /**
+   * 对密码进行加密
+   *
+   * @param password 原始密码
+   * @return 加密后的密码
+   */
+  public String encodePassword(String password) {
+    return SpringUtil.getBean(PasswordEncoder.class).encode(password);
+  }
 
   /**
    * 获取JWT载荷

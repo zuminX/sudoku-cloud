@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel(value = "com-zumin-sudoku-user-pojo-entity-SysUserRole")
+@ApiModel(value = "com-zumin-sudoku-ums-pojo-entity-SysUserRole")
 @Data
 @TableName(value = "sys_user_role")
 public class SysUserRole {
