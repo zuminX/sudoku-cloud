@@ -2,8 +2,8 @@ package com.zumin.sudoku.auth.controller;
 
 import com.zumin.sudoku.auth.pojo.dto.OAuth2TokenDTO;
 import com.zumin.sudoku.auth.service.CaptchaService;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
-import com.zumin.sudoku.common.core.constant.AuthParamName;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthParamName;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.web.annotation.ComRestController;
 import com.zumin.sudoku.common.web.utils.SecurityUtils;
@@ -22,7 +22,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RequiredArgsConstructor
 @ComRestController(path = "/oauth", tags = "认证中心")
-public class AuthController {
+public class OAuthController {
 
   private final TokenEndpoint tokenEndpoint;
 

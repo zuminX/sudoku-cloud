@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(value = "sudoku-admin")
 public interface UserFeign {
 
-  @GetMapping("/info/username/{username}")
+  @GetMapping("/user/username/{username}")
   CommonResult<UserDTO> getUserByUsername(@PathVariable String username);
 }

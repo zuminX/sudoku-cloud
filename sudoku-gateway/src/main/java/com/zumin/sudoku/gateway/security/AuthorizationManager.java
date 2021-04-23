@@ -1,7 +1,7 @@
 package com.zumin.sudoku.gateway.security;
 
 import cn.hutool.core.collection.CollUtil;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
 import com.zumin.sudoku.common.redis.utils.RedisUtils;
 import java.util.Map;
 import java.util.Map.Entry;

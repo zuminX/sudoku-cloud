@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zumin.sudoku.admin.mapper.SysResourceMapper;
 import com.zumin.sudoku.admin.pojo.entity.SysResource;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
 import com.zumin.sudoku.common.redis.utils.RedisUtils;
 import java.util.HashMap;
 import java.util.List;

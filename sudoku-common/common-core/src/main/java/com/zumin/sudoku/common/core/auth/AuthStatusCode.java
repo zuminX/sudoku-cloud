@@ -1,5 +1,6 @@
-package com.zumin.sudoku.common.core.enums;
+package com.zumin.sudoku.common.core.auth;
 
+import com.zumin.sudoku.common.core.enums.StatusCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

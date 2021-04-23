@@ -1,20 +1,26 @@
 package com.zumin.sudoku.common.web.utils;
 
+import static java.util.stream.Collectors.toList;
+
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
-import com.zumin.sudoku.common.core.constant.AuthParamName;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthParamName;
+import com.zumin.sudoku.common.core.constant.PermissionConstants;
 import com.zumin.sudoku.common.core.utils.ServletUtils;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.logging.log4j.util.Strings;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @UtilityClass
@@ -28,6 +34,16 @@ public class SecurityUtils {
    */
   public String encodePassword(String password) {
     return SpringUtil.getBean(PasswordEncoder.class).encode(password);
+  }
+
+  /**
+   * 判断该角色名列表是否包含管理员
+   *
+   * @param roleNameList 角色名列表
+   * @return 包含返回true，否则返回false
+   */
+  public boolean hasAdmin(@NotNull List<String> roleNameList) {
+    return roleNameList.stream().anyMatch(s -> s.equals(PermissionConstants.ADMIN_NAME));
   }
 
   /**
@@ -99,5 +115,6 @@ public class SecurityUtils {
     }
     return clientId;
   }
+
 
 }

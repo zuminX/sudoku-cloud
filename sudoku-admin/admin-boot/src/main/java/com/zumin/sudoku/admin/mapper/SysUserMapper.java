@@ -1,8 +1,12 @@
 package com.zumin.sudoku.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zumin.sudoku.admin.pojo.body.ModifyUserBody;
+import com.zumin.sudoku.admin.pojo.body.SearchUserBody;
 import com.zumin.sudoku.admin.pojo.entity.SysUser;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,4 +38,35 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
    * @return 用户对象
    */
   SysUser selectWithRoleByUsername(@Param("username") String username);
+
+  /**
+   * 查找系统所有用户，且用户带有角色信息
+   *
+   * @return 用户列表
+   */
+  List<SysUser> selectAllWithRole();
+
+  /**
+   * 查找系统符合条件的用户，且用户带有角色信息
+   *
+   * @return 用户列表
+   */
+  List<SysUser> selectByConditionWithRole(@Param("user") SearchUserBody user);
+
+  /**
+   * 查找系统中用户名或昵称中包含指定名称的用户给，且用户带有角色信息
+   *
+   * @param name 名称
+   * @return 用户列表
+   */
+  List<SysUser> selectByNameWithRole(@Param("name") String name);
+
+  /**
+   * 根据ID更新用户
+   *
+   * @param user 用户修改对象
+   * @return 更新的行数
+   */
+  int updateModifyById(@Param("user") ModifyUserBody user);
+
 }

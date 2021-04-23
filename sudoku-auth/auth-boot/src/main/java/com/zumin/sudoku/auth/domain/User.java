@@ -3,7 +3,7 @@ package com.zumin.sudoku.auth.domain;
 
 import cn.hutool.core.collection.CollUtil;
 import com.zumin.sudoku.admin.pojo.dto.UserDTO;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
 import java.util.ArrayList;
 import java.util.Collection;
 import lombok.Data;

@@ -18,6 +18,15 @@
     id, username, `password`, nickname, avatar, create_time, recent_login_time, enabled
   </sql>
 
+  <sql id="SelectUserWithRole">
+    WITH user_merge_role as (
+      select u.*, r.id as role_id, r.name as role_name, r.nickname as role_nickname
+      from sys_user u
+      inner join sys_user_role ur on u.id = ur.user_id
+      inner join sys_role r on ur.role_id = r.id
+      )
+  </sql>
+
   <resultMap extends="BaseResultMap" id="UserWithRole" type="com.zumin.sudoku.admin.pojo.entity.SysUser">
     <collection ofType="com.zumin.sudoku.admin.pojo.entity.SysRole" property="roleList">
       <id column="role_id" property="id"/>
@@ -41,9 +50,95 @@
   </select>
 
   <select id="selectWithRoleByUsername" resultMap="UserWithRole">
-    select u.*, r.id as role_id, r.name as role_name, r.nickname as role_nickname
-    from sys_user u
-           inner join sys_user_role ur on u.id = ur.user_id
-           inner join sys_role r on ur.role_id = r.id
+    <include refid="SelectUserWithRole"/>
+    select *
+    from user_merge_role
+    where username = #{username,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectAllWithRole" resultMap="UserWithRole">
+    <include refid="SelectUserWithRole"/>
+    select *
+    from user_merge_role
+  </select>
+
+  <select id="selectByConditionWithRole" resultMap="UserWithRole">
+    <include refid="SelectUserWithRole"/>
+    , data as (
+      select *
+      from user_merge_role
+    <where>
+      <if test="user.createTimeRange != null">
+        create_time <![CDATA[>=]]> #{user.createTimeRange.start,jdbcType=TIMESTAMP}
+          and create_time <![CDATA[<=]]> #{user.createTimeRange.end,jdbcType=TIMESTAMP}
+      </if>
+      <if test="user.recentLoginTimeRange != null">
+        and recent_login_time <![CDATA[>=]]> #{user.recentLoginTimeRange.start,jdbcType=TIMESTAMP}
+        and recent_login_time <![CDATA[<=]]> #{user.recentLoginTimeRange.end,jdbcType=TIMESTAMP}
+      </if>
+      <if test="user.username != null and user.username.trim() != ''">
+        and username like concat('%', #{user.username,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="user.nickname != null and user.nickname.trim() != ''">
+        and nickname like concat('%', #{user.username,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="user.enabled != null">
+        and enabled = #{user.enabled,jdbcType=BOOLEAN}
+      </if>
+      <if test="user.roleNameList != null and user.roleNameList.size() > 0">
+        and role_name in
+        <foreach close=")" collection="user.roleNameList" item="name" open="(" separator=",">
+          #{name,jdbcType=VARCHAR}
+        </foreach>
+      </if>
+    </where>
+    )
+      select *
+      from data
+    <where>
+      <if test="user.roleNameList != null and user.roleNameList.size() > 0">
+        id in (
+          select ids.u_id
+          from (
+                 select user_merge_role.id as u_id, count(1) as role_count
+                 from user_merge_role
+                 group by u_id) as ids
+          where ids.role_count = ${user.roleNameList.size()})
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByNameWithRole" resultMap="UserWithRole">
+    <include refid="SelectUserWithRole"/>
+    select *
+    from user_merge_role
+    <where>
+      <if test="name != null and name != ''">
+        username like concat('%', #{name,jdbcType=VARCHAR}, '%')
+          or nickname like concat('%', #{name,jdbcType=VARCHAR}, '%')
+      </if>
+    </where>
+  </select>
+
+  <update id="updateModifyById">
+    update sys_user
+    <set>
+      <if test="user.username != null">
+        username = #{user.username,jdbcType=VARCHAR},
+      </if>
+      <if test="user.nickname != null">
+        nickname = #{user.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="user.createTime != null">
+        create_time = #{user.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user.recentLoginTime != null">
+        recent_login_time = #{user.recentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user.enabled != null">
+        enabled = #{user.enabled,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{user.id,jdbcType=INTEGER}
+  </update>
 </mapper>

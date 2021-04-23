@@ -1,12 +1,11 @@
 package com.zumin.sudoku.ums.controller;
 
-import com.zumin.sudoku.auth.feign.AuthFeign;
+import com.zumin.sudoku.auth.feign.CaptchaFeign;
+import com.zumin.sudoku.auth.feign.OAuthFeign;
 import com.zumin.sudoku.auth.pojo.dto.OAuth2TokenDTO;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.web.annotation.ComRestController;
 import com.zumin.sudoku.ums.convert.UserConvert;
-import com.zumin.sudoku.ums.enums.UmsStatusCode;
-import com.zumin.sudoku.ums.exception.UserException;
 import com.zumin.sudoku.ums.pojo.body.LoginBody;
 import com.zumin.sudoku.ums.pojo.body.RegisterUserBody;
 import com.zumin.sudoku.ums.pojo.entity.SysUser;
@@ -25,7 +24,7 @@ public class SecurityController {
 
   private final SysUserService sysUserService;
 
-  private final AuthFeign authFeign;
+  private final CaptchaFeign captchaFeign;
 
   private final UserConvert userConvert;
 
@@ -40,7 +39,7 @@ public class SecurityController {
   @ApiOperation("注册用户")
   @ApiImplicitParam(name = "registerUser", value = "注册用户信息", dataTypeClass = RegisterUserBody.class, required = true)
   public UserVO registerUser(@RequestBody @Valid RegisterUserBody registerUser) {
-    authFeign.checkCaptcha(registerUser.getUuid(), registerUser.getCode());
+    captchaFeign.checkCaptcha(registerUser.getUuid(), registerUser.getCode());
     SysUser sysUser = sysUserService.registerUser(registerUser);
     return userConvert.convert(sysUser);
   }

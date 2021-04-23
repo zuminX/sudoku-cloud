@@ -6,10 +6,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@ApiModel(value = "com-zumin-sudoku-ums-pojo-entity-SysUserRole")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "sys_user_role")
 public class SysUserRole {
 
@@ -33,4 +36,9 @@ public class SysUserRole {
   @TableField(value = "role_id")
   @ApiModelProperty(value = "角色ID")
   private Long roleId;
+
+  public SysUserRole(Long userId, Long roleId) {
+    this.userId = userId;
+    this.roleId = roleId;
+  }
 }

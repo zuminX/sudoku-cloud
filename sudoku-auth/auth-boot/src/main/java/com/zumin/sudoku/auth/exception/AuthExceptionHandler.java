@@ -1,6 +1,6 @@
 package com.zumin.sudoku.auth.exception;
 
-import com.zumin.sudoku.common.core.enums.AuthStatusCode;
+import com.zumin.sudoku.common.core.auth.AuthStatusCode;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;

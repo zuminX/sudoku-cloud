@@ -1,8 +1,8 @@
 package com.zumin.sudoku.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
-import com.zumin.sudoku.common.core.enums.AuthStatusCode;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthStatusCode;
 import com.zumin.sudoku.gateway.security.AuthorizationManager;
 import com.zumin.sudoku.gateway.utils.GatewayUtils;
 import lombok.RequiredArgsConstructor;

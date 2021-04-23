@@ -1,6 +1,6 @@
 package com.zumin.sudoku.auth.exception;
 
-import com.zumin.sudoku.common.core.enums.AuthStatusCode;
+import com.zumin.sudoku.common.core.auth.AuthStatusCode;
 import com.zumin.sudoku.common.core.enums.StatusCode;
 import com.zumin.sudoku.common.core.exception.BaseException;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.zumin.sudoku.common.core.constant;
+package com.zumin.sudoku.common.core.auth;
 
 /**
  * 认证常量类
@@ -76,4 +76,5 @@ public interface AuthConstants {
    * Redis缓存权限规则key
    */
   String RESOURCE_ROLES_KEY = "auth:resource:roles";
+
 }

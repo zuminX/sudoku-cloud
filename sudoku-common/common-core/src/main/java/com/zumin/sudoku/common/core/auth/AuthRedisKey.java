@@ -1,4 +1,4 @@
-package com.zumin.sudoku.common.core.constant;
+package com.zumin.sudoku.common.core.auth;
 
 /**
  * Redis键

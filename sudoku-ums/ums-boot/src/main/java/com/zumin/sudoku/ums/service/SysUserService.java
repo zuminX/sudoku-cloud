@@ -1,12 +1,12 @@
 package com.zumin.sudoku.ums.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zumin.sudoku.auth.feign.AuthFeign;
+import com.zumin.sudoku.auth.feign.OAuthFeign;
 import com.zumin.sudoku.auth.pojo.dto.OAuth2TokenDTO;
-import com.zumin.sudoku.common.core.constant.AuthConstants;
-import com.zumin.sudoku.common.core.constant.AuthParamName;
+import com.zumin.sudoku.common.core.auth.AuthConstants;
+import com.zumin.sudoku.common.core.auth.AuthGrantType;
+import com.zumin.sudoku.common.core.auth.AuthParamName;
 import com.zumin.sudoku.common.core.constant.PermissionConstants;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.web.log.Log;
@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
-  private final AuthFeign authFeign;
+  private final OAuthFeign oAuthFeign;
 
   private final SysRoleService roleService;
 
@@ -51,12 +51,12 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     Map<String, String> params = new HashMap<>();
     params.put(AuthParamName.CLIENT_ID, AuthConstants.USER_CLIENT_ID);
     params.put(AuthParamName.CLIENT_SECRET, clientSecret);
-    params.put(AuthParamName.GRANT_TYPE, "password");
+    params.put(AuthParamName.GRANT_TYPE, AuthGrantType.PASSWORD);
     params.put(AuthParamName.USERNAME, loginBody.getUsername());
     params.put(AuthParamName.PASSWORD, loginBody.getPassword());
     params.put(AuthParamName.CAPTCHA_UUID, loginBody.getUuid());
     params.put(AuthParamName.CAPTCHA_CODE, loginBody.getCode());
-    return authFeign.postAccessToken(params);
+    return oAuthFeign.postAccessToken(params);
   }
 
   /**
@@ -71,7 +71,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     checkUsername(registerUserBody.getUsername().trim());
     SysUser user = convertToUser(registerUserBody);
     baseMapper.insert(user);
-    List<SysRole> roleList = insertUserRole(user.getId(), PermissionConstants.USER_ROLE_NAME);
+    List<SysRole> roleList = insertUserRole(user.getId());
     user.setRoleList(roleList);
     return user;
   }
@@ -79,11 +79,11 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
   /**
    * 插入用户角色
    *
-   * @param userId       用户ID
-   * @param roleNameList 角色名列表
+   * @param userId 用户ID
+   * @return 角色列表
    */
-  private List<SysRole> insertUserRole(Long userId, List<String> roleNameList) {
-    List<SysRole> roleList = roleService.list(Wrappers.lambdaQuery(SysRole.class).in(SysRole::getName, roleNameList));
+  private List<SysRole> insertUserRole(Long userId) {
+    List<SysRole> roleList = roleService.list(Wrappers.lambdaQuery(SysRole.class).in(SysRole::getName, PermissionConstants.USER_ROLE_NAME));
     List<SysUserRole> userRoles = roleList.stream()
         .map(role -> new SysUserRole(userId, role.getId()))
         .collect(Collectors.toList());
@@ -111,7 +111,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
    * @param username 用户名
    */
   private void checkUsername(String username) {
-    if (baseMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username)) != null) {
+    if (baseMapper.selectOne(Wrappers.lambdaQuery(SysUser.class).eq(SysUser::getUsername, username)) != null) {
       throw new UserException(UmsStatusCode.USER_HAS_EQUAL_NAME);
     }
   }
