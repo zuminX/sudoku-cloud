@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sudoku-game
+
+common:
+  core:
+    projectPackage: 'com.zumin.sudoku.game'

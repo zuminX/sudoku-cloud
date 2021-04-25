@@ -50,7 +50,7 @@ CREATE TABLE `game_normal_record`
 (
     `id`        bigint AUTO_INCREMENT COMMENT '游戏记录的ID',
     `answer`    char(81) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '输入的数独矩阵',
-    `situation` tinyint NOT NULL DEFAULT 1 COMMENT '回答情况',
+    `situation` tinyint NOT NULL DEFAULT 0 COMMENT '回答情况',
     `user_id`   bigint COMMENT '用户ID',
     `record_id` bigint COMMENT '数独记录ID',
     PRIMARY KEY (`id`) USING BTREE
@@ -60,7 +60,7 @@ CREATE TABLE `game_normal_record`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `game_normal_record`
-VALUES (null, '239187465586394127471625398942761583318459276657832914894516732723948651165273849', 1, 1, 1);
+VALUES (null, '239187465586394127471625398942761583318459276657832914894516732723948651165273849', 0, 1, 1);
 
 
 DROP TABLE IF EXISTS `game_race_information`;

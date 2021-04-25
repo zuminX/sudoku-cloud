@@ -1,10 +1,10 @@
 package com.zumin.sudoku.admin.controller;
 
 import com.zumin.sudoku.admin.convert.UserConvert;
+import com.zumin.sudoku.admin.dto.UserDTO;
 import com.zumin.sudoku.admin.pojo.body.AddUserBody;
 import com.zumin.sudoku.admin.pojo.body.ModifyUserBody;
 import com.zumin.sudoku.admin.pojo.body.SearchUserBody;
-import com.zumin.sudoku.admin.pojo.dto.UserDTO;
 import com.zumin.sudoku.admin.pojo.entity.SysUser;
 import com.zumin.sudoku.admin.pojo.vo.UserDetailVO;
 import com.zumin.sudoku.admin.service.SysUserService;

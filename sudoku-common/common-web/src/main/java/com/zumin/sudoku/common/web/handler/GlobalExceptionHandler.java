@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice
-@ConditionalOnExpression("#{!'false'.equals(environment['common.web.global.exception-handler'])}")
+@ConditionalOnExpression("#{!'false'.equals(environment['common.web.exception-handler'])}")
 public class GlobalExceptionHandler {
 
   private static final String INVALID_PARAM_TIP_TEMPLATE = "{}：{}";

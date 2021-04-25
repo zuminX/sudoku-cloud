@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 /**
  * 全局数据绑定处理器类
  */
-@ControllerAdvice(basePackages = {"com.zumin.sudoku.**.controller"})
-@ConditionalOnExpression("#{!'false'.equals(environment['common.web.global.data-binding'])}")
+@ControllerAdvice(basePackages = {"com.zumin.sudoku"})
+@ConditionalOnExpression("#{!'false'.equals(environment['common.web.data-binding'])}")
 public class GlobalDataBindingHandler implements DataBindingHandler {
 
   /**

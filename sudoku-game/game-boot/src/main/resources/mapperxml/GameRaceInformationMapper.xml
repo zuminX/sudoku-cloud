@@ -4,17 +4,27 @@
   <resultMap id="BaseResultMap" type="com.zumin.sudoku.game.pojo.entity.GameRaceInformation">
     <!--@mbg.generated-->
     <!--@Table game_race_information-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="matrix" jdbcType="CHAR" property="matrix" />
-    <result column="holes" jdbcType="CHAR" property="holes" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="title" jdbcType="VARCHAR" property="title"/>
+    <result column="description" jdbcType="VARCHAR" property="description"/>
+    <result column="matrix" jdbcType="CHAR" property="matrix"/>
+    <result column="holes" jdbcType="CHAR" property="holes"/>
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+    <result column="user_id" jdbcType="BIGINT" property="userId"/>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, title, description, matrix, holes, start_time, end_time, user_id
   </sql>
+
+  <select id="selectAllByEndTimeBefore" resultType="com.zumin.sudoku.game.pojo.vo.GameRaceInformationVO">
+    select id,
+           title,
+           description,
+           start_time,
+           end_time
+    from game_race_information
+    where end_time <![CDATA[<]]> #{maxEndTime,jdbcType=TIMESTAMP}
+  </select>
 </mapper>

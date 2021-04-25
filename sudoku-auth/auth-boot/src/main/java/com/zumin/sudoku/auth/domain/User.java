@@ -2,10 +2,11 @@ package com.zumin.sudoku.auth.domain;
 
 
 import cn.hutool.core.collection.CollUtil;
-import com.zumin.sudoku.admin.pojo.dto.UserDTO;
+import com.zumin.sudoku.admin.dto.UserDTO;
 import com.zumin.sudoku.common.core.auth.AuthConstants;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,8 +37,8 @@ public class User implements UserDetails {
   public User(UserDTO user) {
     this.setId(user.getId());
     this.setUsername(user.getUsername());
-    this.setPassword(AuthConstants.BCRYPT + user.getPassword());
-    this.setEnabled(Integer.valueOf(1).equals(user.getEnabled()));
+    this.setPassword(user.getPassword());
+    this.setEnabled(Objects.equals(1, user.getEnabled()));
     this.setClientId(user.getClientId());
     if (CollUtil.isNotEmpty(user.getRoleIds())) {
       authorities = new ArrayList<>();

@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sudoku-auth
+
+common:
+  web:
+    data-binding: false
+    response: false
+  core:
+    projectPackage: 'com.zumin.sudoku.auth'

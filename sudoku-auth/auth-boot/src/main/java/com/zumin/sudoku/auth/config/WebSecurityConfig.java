@@ -1,5 +1,6 @@
 package com.zumin.sudoku.auth.config;
 
+import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

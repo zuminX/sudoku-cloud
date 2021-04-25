@@ -1,8 +1,8 @@
 package com.zumin.sudoku.auth.service;
 
 
+import com.zumin.sudoku.admin.dto.UserDTO;
 import com.zumin.sudoku.admin.feign.UserFeign;
-import com.zumin.sudoku.admin.pojo.dto.UserDTO;
 import com.zumin.sudoku.auth.domain.User;
 import com.zumin.sudoku.common.core.auth.AuthConstants;
 import com.zumin.sudoku.common.core.auth.AuthStatusCode;

@@ -100,7 +100,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
    */
   @Bean
   public AuthenticationEntryPoint authenticationEntryPoint() {
-    return (request, response, e) -> ServletUtils.returnJsonData(response, CommonResult.error(AuthStatusCode.CLIENT_AUTHENTICATION_FAILED));
+    return (request, response, e) -> {
+      e.printStackTrace();
+      ServletUtils.returnJsonData(response, CommonResult.error(AuthStatusCode.CLIENT_AUTHENTICATION_FAILED));
+    };
   }
 
   /**

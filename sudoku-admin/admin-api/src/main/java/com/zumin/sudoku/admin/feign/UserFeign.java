@@ -1,6 +1,6 @@
 package com.zumin.sudoku.admin.feign;
 
-import com.zumin.sudoku.admin.pojo.dto.UserDTO;
+import com.zumin.sudoku.admin.dto.UserDTO;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

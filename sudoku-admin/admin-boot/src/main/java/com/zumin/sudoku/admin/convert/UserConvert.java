@@ -1,7 +1,7 @@
 package com.zumin.sudoku.admin.convert;
 
+import com.zumin.sudoku.admin.dto.UserDTO;
 import com.zumin.sudoku.admin.pojo.body.AddUserBody;
-import com.zumin.sudoku.admin.pojo.dto.UserDTO;
 import com.zumin.sudoku.admin.pojo.entity.SysRole;
 import com.zumin.sudoku.admin.pojo.entity.SysUser;
 import com.zumin.sudoku.admin.pojo.vo.UserDetailVO;
@@ -47,6 +47,12 @@ public interface UserConvert {
   @Mapping(target = "password", expression = "java(SecurityUtils.encodePassword(addUserBody.getPassword()))")
   SysUser addBodyToEntity(AddUserBody addUserBody);
 
+  /**
+   * 将角色列表转换为角色ID列表
+   *
+   * @param roleList 角色列表
+   * @return 角色ID列表
+   */
   default List<Long> roleListToRoleIdList(List<SysRole> roleList) {
     return roleList.stream().map(SysRole::getId).collect(Collectors.toList());
   }

@@ -2,6 +2,7 @@ package com.zumin.sudoku.common.web.handler;
 
 import com.zumin.sudoku.common.core.result.CommonResult;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * 全局响应体处理器
  */
 @ControllerAdvice(basePackages = {"com.zumin.sudoku"})
-@ConditionalOnExpression("#{!'false'.equals(environment['common.web.global.response'])}")
+@ConditionalOnExpression("#{!'false'.equals(environment['common.web.response'])}")
 public class GlobalResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
   /**

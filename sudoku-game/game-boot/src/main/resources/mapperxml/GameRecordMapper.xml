@@ -15,4 +15,11 @@
     <!--@mbg.generated-->
     id, matrix, holes, start_time, end_time, level_id
   </sql>
+
+  <select id="countByDateBetween" resultType="java.lang.Integer">
+    select count(1)
+    from sudoku_record
+    where DATE(`start_time`) <![CDATA[>=]]> DATE(#{startDate,jdbcType=DATE})
+    and DATE(`end_time`) <![CDATA[<]]> DATE(#{endDate,jdbcType=DATE})
+  </select>
 </mapper>
