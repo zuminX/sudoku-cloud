@@ -15,4 +15,5 @@ spring:
           - data-id: datasource.yaml
           - data-id: mybatis.yaml
           - data-id: openfeign.yaml
+          - data-id: endpoints.yaml
 

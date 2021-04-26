@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
     `id`                bigint AUTO_INCREMENT COMMENT '用户ID',
-    `username`          varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户名',
+    `username`          varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  NOT NULL COMMENT '用户名',
     `password`          varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
     `nickname`          varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '昵称',
     `avatar`            varchar(128) DEFAULT NULL COMMENT '头像地址',
@@ -95,7 +95,12 @@ CREATE TABLE `sys_resource`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `sys_resource`
-VALUES (1, '/admin/**', '*', '系统后台管理')
+VALUES (1, '/admin/**', '*', '系统后台管理'),
+       (2, '/game/gameRace/publishPublicRace', '*', '发布数独竞赛'),
+       (3, '/game/statistics/**', '*', '游戏统计信息'),
+       (4, '/game/game/generateSudokuFinal', '*', '生成数独终盘'),
+       (5, '/game/user/historyGameRecordById', '*', '用户历史游戏记录'),
+       (6, '/game/user/gameInformationById', '*', '用户游戏信息')
 ;
 
 
@@ -112,5 +117,10 @@ CREATE TABLE `sys_resource_role`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `sys_resource_role`
-VALUES (1, 1, 2)
-       ;
+VALUES (1, 1, 2),
+       (2, 2, 2),
+       (3, 3, 2),
+       (4, 4, 2),
+       (5, 5, 2),
+       (6, 6, 2)
+;

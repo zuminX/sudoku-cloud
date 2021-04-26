@@ -22,14 +22,14 @@ public class StatisticsGameController extends GameBaseController {
 
   private final StatisticsGameService statisticsGameService;
 
-  @PostMapping("/game/assignTotal")
+  @PostMapping("/assignTotal")
   @ApiOperation("获取指定日期的游戏局数")
   @ApiImplicitParam(name = "dateRange", value = "统计日期范围", dataTypeClass = StatisticsDateRange.class, required = true)
   public List<Integer> getAssignDateGameTotal(@RequestBody @Valid StatisticsDateRange dateRange) {
     return statisticsGameService.getGameTotal(dateRange);
   }
 
-  @GetMapping("/game/recentTotal")
+  @GetMapping("/recentTotal")
   @ApiOperation("获取最近日期的游戏局数")
   @ApiImplicitParam(name = "date", value = "统计日期类", dataTypeClass = StatisticsDate.class, required = true)
   public List<Integer> getRecentDateGameTotal(@RequestParam("date") StatisticsDate date) {
@@ -38,7 +38,7 @@ public class StatisticsGameController extends GameBaseController {
     return getAssignDateGameTotal(new StatisticsDateRange(new LocalDateRange(startDate, endDate), date));
   }
 
-  @GetMapping("/game/total")
+  @GetMapping("/total")
   @ApiOperation("获取系统游戏总局数")
   public Integer getGameTotal() {
     return statisticsGameService.getGameTotal();

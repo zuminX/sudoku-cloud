@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.context.request.RequestAttributes;
@@ -16,13 +17,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 客户端工具类
  */
+@UtilityClass
 public class ServletUtils {
-
-  /**
-   * 私有构造方法，防止实例化
-   */
-  private ServletUtils() {
-  }
 
   /**
    * 将数据转换为JSON数据响应给客户端
@@ -31,7 +27,7 @@ public class ServletUtils {
    * @param data     数据
    * @throws IOException IO异常
    */
-  public static void returnJsonData(HttpServletResponse response, Object data) throws IOException {
+  public void returnJsonData(HttpServletResponse response, Object data) throws IOException {
     response.setStatus(HttpStatus.HTTP_OK);
     response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
     response.setHeader("Access-Control-Allow-Origin", "*");
@@ -47,7 +43,7 @@ public class ServletUtils {
    *
    * @return 请求对象
    */
-  public static HttpServletRequest getRequest() {
+  public HttpServletRequest getRequest() {
     return getRequestAttributes().getRequest();
   }
 
@@ -56,7 +52,7 @@ public class ServletUtils {
    *
    * @return 响应对象
    */
-  public static HttpServletResponse getResponse() {
+  public HttpServletResponse getResponse() {
     return getRequestAttributes().getResponse();
   }
 
@@ -66,7 +62,7 @@ public class ServletUtils {
    * @param name 参数名称
    * @return 参数
    */
-  public static String getParameter(String name) {
+  public String getParameter(String name) {
     return getRequest().getParameter(name);
   }
 
@@ -77,7 +73,7 @@ public class ServletUtils {
    * @param defaultValue 默认值
    * @return 参数
    */
-  public static String getParameter(String name, String defaultValue) {
+  public String getParameter(String name, String defaultValue) {
     return Convert.toStr(getRequest().getParameter(name), defaultValue);
   }
 
@@ -87,7 +83,7 @@ public class ServletUtils {
    * @param name 参数名称
    * @return 参数
    */
-  public static Integer getParameterToInt(String name) {
+  public Integer getParameterToInt(String name) {
     return Convert.toInt(getRequest().getParameter(name));
   }
 
@@ -98,7 +94,7 @@ public class ServletUtils {
    * @param defaultValue 默认值
    * @return 参数
    */
-  public static Integer getParameterToInt(String name, Integer defaultValue) {
+  public Integer getParameterToInt(String name, Integer defaultValue) {
     return Convert.toInt(getRequest().getParameter(name), defaultValue);
   }
 
@@ -107,7 +103,7 @@ public class ServletUtils {
    *
    * @return Servlet请求属性
    */
-  private static ServletRequestAttributes getRequestAttributes() {
+  private ServletRequestAttributes getRequestAttributes() {
     RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
     return (ServletRequestAttributes) attributes;
   }

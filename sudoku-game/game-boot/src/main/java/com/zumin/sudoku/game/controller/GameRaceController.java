@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
-@ComRestController(path = "/gameRace", tags = "数独游戏竞赛API接口")
+@ComRestController(path = "/race", tags = "游戏竞赛API接口")
 public class GameRaceController extends GameBaseController {
 
   private final GameRaceInformationService raceInformationService;

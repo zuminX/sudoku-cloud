@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
-@ComRestController(path = "/sudoku", tags = "数独API接口")
-public class SudokuController extends GameBaseController {
+@ComRestController(path = "/level", tags = "游戏难度API接口")
+public class GameLevelController extends GameBaseController {
 
   private final GameLevelService levelService;
 
@@ -24,12 +24,5 @@ public class SudokuController extends GameBaseController {
   @ApiOperation("获取数独的所有难度等级")
   public List<GameLevelVO> getSudokuLevels() {
     return levelService.listGameLevel();
-  }
-
-  @GetMapping("/generateSudokuFinal")
-  @ApiOperation("生成数独终盘")
-  @ApiImplicitParam(name = "gameLevel", value = "难度级别", dataTypeClass = Long.class, required = true)
-  public GameDataBO generateSudokuFinal(@RequestParam("level") GameLevel gameLevel) {
-    return SudokuBuilder.generateSudokuFinal(gameLevel.getMinEmpty(), gameLevel.getMaxEmpty());
   }
 }

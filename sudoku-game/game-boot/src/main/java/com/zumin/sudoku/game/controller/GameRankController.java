@@ -1,6 +1,5 @@
 package com.zumin.sudoku.game.controller;
 
-
 import com.zumin.sudoku.common.mybatis.page.Page;
 import com.zumin.sudoku.common.web.annotation.ComRestController;
 import com.zumin.sudoku.game.pojo.entity.GameLevel;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
-@ComRestController(path = "/rank", tags = "数独游戏排行API接口")
+@ComRestController(path = "/rank", tags = "游戏排行API接口")
 public class GameRankController extends GameBaseController {
 
   private final GameRankService gameRankService;

@@ -20,6 +20,7 @@ public enum UmsStatusCode implements StatusCode {
   USER_REPEAT_PASSWORD_ERROR(14, "重复密码与密码不一致"),
   USER_NOT_ENABLED(15, "该用户处于禁用状态"),
   USER_NOT_MODIFY_AUTHORITY(16, "没有修改的权限"),
+  USER_NOT_LOGIN(17, "用户未登陆"),
   ;
 
   /**

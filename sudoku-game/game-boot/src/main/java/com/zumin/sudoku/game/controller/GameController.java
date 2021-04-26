@@ -12,6 +12,7 @@ import com.zumin.sudoku.game.service.GameNormalRecordService;
 import com.zumin.sudoku.game.service.GameRecordService;
 import com.zumin.sudoku.game.service.SudokuService;
 import com.zumin.sudoku.game.utils.GameUtils;
+import com.zumin.sudoku.game.utils.SudokuBuilder;
 import com.zumin.sudoku.game.validator.IsSudokuMatrix;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -42,7 +43,7 @@ public class GameController extends GameBaseController {
   @GetMapping("/generateTopic")
   @ApiOperation("生成数独题目")
   @ApiImplicitParams({
-      @ApiImplicitParam(name = "level", value = "难度等级ID", dataTypeClass = Integer.class, required = true),
+      @ApiImplicitParam(name = "level", value = "难度等级ID", dataTypeClass = Long.class, required = true),
       @ApiImplicitParam(name = "isRecord", value = "是否记录", dataTypeClass = Boolean.class, required = true)})
   public GameDataBO generateSudokuTopic(@RequestParam GameLevel level,
       @RequestParam @NotNull(message = "是否记录游戏不能为空") Boolean isRecord) {
@@ -66,6 +67,13 @@ public class GameController extends GameBaseController {
     updateGameRecord(userMatrix, userAnswerInformation.getSituation());
     gameUtils.removeGameRecord();
     return userAnswerInformationConvert.boToVo(userAnswerInformation);
+  }
+
+  @GetMapping("/generateSudokuFinal")
+  @ApiOperation("生成数独终盘")
+  @ApiImplicitParam(name = "gameLevel", value = "难度级别", dataTypeClass = Long.class, required = true)
+  public GameDataBO generateSudokuFinal(@RequestParam("level") GameLevel gameLevel) {
+    return SudokuBuilder.generateSudokuFinal(gameLevel.getMinEmpty(), gameLevel.getMaxEmpty());
   }
 
   /**

@@ -1,8 +1,13 @@
-package com.zumin.sudoku.auth.config;
+package com.zumin.sudoku.common.web.config;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -22,20 +27,26 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@Data
 @Configuration
+@EnableKnife4j
 @EnableSwagger2
+@ConfigurationProperties(prefix = "common.web.api")
 public class SwaggerConfiguration {
+
+  private String title;
+
+  private String description;
+
+  @Value("${common.core.projectPackage}")
+  private String projectPackage;
 
   @Bean
   public Docket restApi() {
-    //schema
-    List<GrantType> grantTypes = new ArrayList<>();
     //密码模式
     String passwordTokenUrl = "http://localhost:9999/sudoku-auth/oauth/token";
     ResourceOwnerPasswordCredentialsGrant resourceOwnerPasswordCredentialsGrant = new ResourceOwnerPasswordCredentialsGrant(passwordTokenUrl);
-    grantTypes.add(resourceOwnerPasswordCredentialsGrant);
-    OAuth oAuth = new OAuthBuilder().name("oauth2")
-        .grantTypes(grantTypes).build();
+    OAuth oAuth = new OAuthBuilder().name("oauth2").grantTypes(Collections.singletonList(resourceOwnerPasswordCredentialsGrant)).build();
     //context
     //scope方位
     List<AuthorizationScope> scopes = new ArrayList<>();
@@ -52,7 +63,7 @@ public class SwaggerConfiguration {
     List<SecurityContext> securityContexts = Lists.newArrayList(securityContext);
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
-        .apis(RequestHandlerSelectors.basePackage("com.youlai.auth.controller"))
+        .apis(RequestHandlerSelectors.basePackage(projectPackage + ".controller"))
         .paths(PathSelectors.any())
         .build()
         .securityContexts(securityContexts)
@@ -61,8 +72,8 @@ public class SwaggerConfiguration {
   }
 
   private ApiInfo apiInfo() {
-    return new ApiInfoBuilder().title("OAuth2认证中心")
-        .description("<div style='font-size:14px;color:red;'>OAuth2认证、注销、获取验签公钥接口</div>")
+    return new ApiInfoBuilder().title(title)
+        .description("<div style='font-size:14px;color:red;'>" + description + "</div>")
         .contact(new Contact("yl", "https://github.com/zuminX", "1215287120@qq.com"))
         .license("Open Source")
         .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")

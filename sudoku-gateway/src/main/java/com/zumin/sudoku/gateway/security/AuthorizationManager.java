@@ -3,6 +3,7 @@ package com.zumin.sudoku.gateway.security;
 import cn.hutool.core.collection.CollUtil;
 import com.zumin.sudoku.common.core.auth.AuthConstants;
 import com.zumin.sudoku.common.redis.utils.RedisUtils;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -47,7 +48,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
       return Mono.just(new AuthorizationDecision(true));
     }
     Map<String, Set<String>> resourceRolesMap = redisUtils.getMap(AuthConstants.RESOURCE_ROLES_KEY);
-    Set<String> authorities = getFirstMatch(restPath, resourceRolesMap);
+    Set<String> authorities = getLongestMatch(restPath, resourceRolesMap);
     // 资源没有设置访问权限，直接放行
     if (CollUtil.isEmpty(authorities)) {
       return Mono.just(new AuthorizationDecision(true));
@@ -62,14 +63,19 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
   }
 
   /**
-   * 获取第一个匹配的路径所需要的角色
+   * 获取最长匹配的路径所需要的角色
    *
    * @param restPath         访问路径
    * @param resourceRolesMap 资源对应的角色
    * @return 所需的角色
    */
-  private Set<String> getFirstMatch(String restPath, Map<String, Set<String>> resourceRolesMap) {
+  private Set<String> getLongestMatch(String restPath, Map<String, Set<String>> resourceRolesMap) {
     PathMatcher pathMatcher = new AntPathMatcher();
-    return resourceRolesMap.entrySet().stream().filter(entry -> pathMatcher.match(entry.getKey(), restPath)).findFirst().map(Entry::getValue).orElse(null);
+    return resourceRolesMap.entrySet()
+        .stream()
+        .filter(entry -> pathMatcher.match(entry.getKey(), restPath))
+        .max(Comparator.comparingInt(e -> e.getKey().length()))
+        .map(Entry::getValue)
+        .orElse(null);
   }
 }

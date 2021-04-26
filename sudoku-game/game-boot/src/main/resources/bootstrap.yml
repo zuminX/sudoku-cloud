@@ -7,3 +7,7 @@ spring:
 common:
   core:
     projectPackage: 'com.zumin.sudoku.game'
+  web:
+    api:
+      title: '游戏中心'
+      description: '数独游戏、竞赛接口'

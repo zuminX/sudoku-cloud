@@ -23,4 +23,5 @@ public class CommonWebProperties {
    * 是否开启全局响应处理
    */
   private Boolean response = true;
+
 }
