@@ -22,7 +22,6 @@
     <module>sudoku-ums</module>
     <module>sudoku-auth</module>
     <module>sudoku-game</module>
-    <module>sudoku-auth</module>
     <module>sudoku-admin</module>
   </modules>
 

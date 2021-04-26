@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.BoundZSetOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -26,14 +27,11 @@ import org.springframework.stereotype.Component;
  * Redis工具类
  */
 @Component
+@RequiredArgsConstructor
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 public class RedisUtils {
 
   private final RedisTemplate redisTemplate;
-
-  public RedisUtils(RedisTemplate redisTemplate) {
-    this.redisTemplate = redisTemplate;
-  }
 
   /**
    * 判断Redis中是否有该缓存键

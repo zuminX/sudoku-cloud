@@ -3,27 +3,26 @@ package com.zumin.sudoku.common.core.utils;
 import cn.hutool.core.date.DateUtil;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * 时间工具类
  */
+@UtilityClass
 public class DateUtils {
 
   /**
    * +8的时区
    */
-  private static final ZoneOffset ZONE = ZoneOffset.of("+8");
-
-  private DateUtils() {
-  }
+  private final ZoneOffset ZONE = ZoneOffset.of("+8");
 
   /**
    * 简单的日期字符串，即格式为年月日
    *
    * @return 日期字符串
    */
-  public static String plainDateStr() {
+  public String plainDateStr() {
     return DateUtil.format(LocalDateTime.now(), "yyyyMMdd");
   }
 
@@ -34,7 +33,7 @@ public class DateUtils {
    * @param dateTime2 日期时间二
    * @return 以ms为单位的差值
    */
-  public static long computeDiff(@NotNull LocalDateTime dateTime1, @NotNull LocalDateTime dateTime2) {
+  public long computeDiff(@NotNull LocalDateTime dateTime1, @NotNull LocalDateTime dateTime2) {
     return toTimestamp(dateTime1) - toTimestamp(dateTime2);
   }
 
@@ -45,7 +44,7 @@ public class DateUtils {
    * @param dateTime2 日期时间二
    * @return 以ms为单位的差值
    */
-  public static long computeAbsDiff(@NotNull LocalDateTime dateTime1, @NotNull LocalDateTime dateTime2) {
+  public long computeAbsDiff(@NotNull LocalDateTime dateTime1, @NotNull LocalDateTime dateTime2) {
     return Math.abs(computeDiff(dateTime1, dateTime2));
   }
 
@@ -55,7 +54,7 @@ public class DateUtils {
    * @param localDateTime 本地日期时间
    * @return 对应的时间戳
    */
-  public static long toTimestamp(@NotNull LocalDateTime localDateTime) {
+  public long toTimestamp(@NotNull LocalDateTime localDateTime) {
     return localDateTime.toInstant(ZONE).toEpochMilli();
   }
 }

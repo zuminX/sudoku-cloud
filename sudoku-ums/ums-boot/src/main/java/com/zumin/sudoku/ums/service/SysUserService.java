@@ -60,6 +60,16 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
   }
 
   /**
+   * 根据用户ID查询对应的系统用户，并带上该用户对应的角色
+   *
+   * @param userId 用户ID
+   * @return 系统用户
+   */
+  public SysUser getUserWithRoleById(Long userId) {
+    return baseMapper.selectWithRoleById(userId);
+  }
+
+  /**
    * 注册用户
    *
    * @param registerUserBody 注册用户对象

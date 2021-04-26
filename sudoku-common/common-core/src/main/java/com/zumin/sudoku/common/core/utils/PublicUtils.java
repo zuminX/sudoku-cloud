@@ -6,22 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import lombok.experimental.UtilityClass;
 
 /**
  * 公共工具类
  */
+@UtilityClass
 public class PublicUtils {
 
   /**
    * 生成随机数的对象
    */
-  private static final Random RANDOM = new Random();
-
-  /**
-   * 私有构造方法，防止实例化
-   */
-  private PublicUtils() {
-  }
+  private final Random RANDOM = new Random();
 
   /**
    * 将二维Integer型List转为二维int数组
@@ -29,7 +25,7 @@ public class PublicUtils {
    * @param list 列表
    * @return 转换后的二维数组
    */
-  public static int[][] unwrapIntArray(List<List<Integer>> list) {
+  public int[][] unwrapIntArray(List<List<Integer>> list) {
     if (CollUtil.isEmpty(list)) {
       return new int[0][0];
     }
@@ -48,12 +44,12 @@ public class PublicUtils {
     return result;
   }
 
-  public static Integer[][] wrap(int[][] list) {
+  public Integer[][] wrap(int[][] list) {
     return Arrays.stream(list).map(ArrayUtil::wrap).toArray(Integer[][]::new);
   }
 
 
-  public static Boolean[][] wrap(boolean[][] list) {
+  public Boolean[][] wrap(boolean[][] list) {
     return Arrays.stream(list).map(ArrayUtil::wrap).toArray(Boolean[][]::new);
   }
 
@@ -63,7 +59,7 @@ public class PublicUtils {
    * @param list 列表
    * @return 转换后的二维数组
    */
-  public static boolean[][] unwrapBoolArray(List<List<Boolean>> list) {
+  public boolean[][] unwrapBoolArray(List<List<Boolean>> list) {
     if (CollUtil.isEmpty(list)) {
       return new boolean[0][0];
     }
@@ -89,7 +85,7 @@ public class PublicUtils {
    * @param max 最大值
    * @return [min, max]之间的一个整数
    */
-  public static int getRandomInt(int min, int max) {
+  public int getRandomInt(int min, int max) {
     if (min > max) {
       throw new IllegalArgumentException("最小值必须小于或等于最大值");
     }
@@ -102,7 +98,7 @@ public class PublicUtils {
    * @param source 源数据
    * @return 深拷贝的数组
    */
-  public static int[][] deepClone(int[][] source) {
+  public int[][] deepClone(int[][] source) {
     if (source == null) {
       return null;
     }
@@ -120,7 +116,7 @@ public class PublicUtils {
    * @param source 源数据
    * @return 深拷贝的数组
    */
-  public static boolean[][] deepClone(boolean[][] source) {
+  public boolean[][] deepClone(boolean[][] source) {
     if (source == null) {
       return null;
     }
@@ -137,7 +133,7 @@ public class PublicUtils {
    *
    * @param array 待打乱的数组
    */
-  public static void randomizedArray(int[] array) {
+  public void randomizedArray(int[] array) {
     for (int i = array.length - 1; i > 0; i--) {
       int random = getRandomInt(0, i);
       int temp = array[i];
@@ -151,7 +147,7 @@ public class PublicUtils {
    *
    * @param array 待打乱的数组
    */
-  public static void randomizedArray(boolean[][] array) {
+  public void randomizedArray(boolean[][] array) {
     for (int row = array.length, column = array[0].length, i = row * column - 1; i > 0; i--) {
       int random = getRandomInt(0, i);
       boolean temp = array[i / row][i % column];
@@ -166,7 +162,7 @@ public class PublicUtils {
    * @param array 二维int型数组
    * @return 对应的字符串
    */
-  public static String compressionIntArray(int[][] array) {
+  public String compressionIntArray(int[][] array) {
     if (ArrayUtil.isEmpty(array)) {
       return "";
     }
@@ -179,7 +175,7 @@ public class PublicUtils {
    * @param list 二维int型列表
    * @return 对应的字符串
    */
-  public static String compressionIntList(List<List<Integer>> list) {
+  public String compressionIntList(List<List<Integer>> list) {
     return PublicUtils.compressionIntArray(PublicUtils.unwrapIntArray(list));
   }
 
@@ -189,7 +185,7 @@ public class PublicUtils {
    * @param array 二维boolean型数组
    * @return 对应的字符串
    */
-  public static String compressionBoolArray(boolean[][] array) {
+  public String compressionBoolArray(boolean[][] array) {
     if (ArrayUtil.isEmpty(array)) {
       return "";
     }
@@ -208,7 +204,7 @@ public class PublicUtils {
    * @param list 二维boolean型列表
    * @return 对应的字符串
    */
-  public static String compressionBoolList(List<List<Boolean>> list) {
+  public String compressionBoolList(List<List<Boolean>> list) {
     return PublicUtils.compressionBoolArray(PublicUtils.unwrapBoolArray(list));
   }
 

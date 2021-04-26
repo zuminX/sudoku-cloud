@@ -7,23 +7,23 @@ import com.zumin.sudoku.common.core.enums.CommonStatusCode;
 import com.zumin.sudoku.common.core.exception.FileException;
 import com.zumin.sudoku.common.core.utils.DateUtils;
 import java.util.Arrays;
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 文件工具类
  */
-@Component
+@UtilityClass
 public class FileUtils {
 
-  public static String getAbsolutePath(String dir, String fileName) {
+  public String getAbsolutePath(String dir, String fileName) {
     return StrUtil.isBlank(fileName) ? dir : dir + '/' + fileName;
   }
 
   /**
    * 编码文件名
    */
-  public static String extractFilename(MultipartFile file) {
+  public String extractFilename(MultipartFile file) {
     String extension = getExtension(file);
     return DateUtils.plainDateStr() + "/" + UUID.fastUUID() + "." + extension;
   }
@@ -33,7 +33,7 @@ public class FileUtils {
    *
    * @param file 上传的文件
    */
-  public static void assertAllowed(MultipartFile file, String[] allowedExtension) {
+  public void assertAllowed(MultipartFile file, String[] allowedExtension) {
     String extension = getExtension(file);
     if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
       if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
@@ -53,7 +53,7 @@ public class FileUtils {
    * @param allowedExtension
    * @return
    */
-  public static boolean isAllowedExtension(String extension, String[] allowedExtension) {
+  public boolean isAllowedExtension(String extension, String[] allowedExtension) {
     return Arrays.stream(allowedExtension).anyMatch(str -> str.equalsIgnoreCase(extension));
   }
 
@@ -63,7 +63,7 @@ public class FileUtils {
    * @param file 表单文件
    * @return 后缀名
    */
-  public static String getExtension(MultipartFile file) {
+  public String getExtension(MultipartFile file) {
     String extension = FileNameUtil.getSuffix(file.getOriginalFilename());
     return StrUtil.isBlank(extension) ? MimeTypeUtils.getExtension(file.getContentType()) : extension;
   }

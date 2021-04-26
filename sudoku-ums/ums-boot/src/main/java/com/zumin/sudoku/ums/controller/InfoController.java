@@ -11,22 +11,23 @@ import com.zumin.sudoku.ums.service.SysUserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @ComRestController(path = "/info", tags = "用户信息API接口")
 public class InfoController {
 
-  private final SysUserService sysUserService;
+  private final SysUserService userService;
   private final UserConvert userConvert;
 
-  @PostMapping("/basic")
+  @GetMapping("/basic")
   @ApiOperation("获取当前用户的基本信息")
   public UserVO basicInfo() {
     Long userId = SecurityUtils.getUserId();
     if (userId == null) {
       throw new UserException(UmsStatusCode.USER_NOT_LOGIN);
     }
-    return userConvert.convert(sysUserService.getById(userId));
+    return userConvert.convert(userService.getUserWithRoleById(userId));
   }
 }

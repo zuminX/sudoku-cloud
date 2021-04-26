@@ -12,41 +12,36 @@ import com.zumin.sudoku.common.mybatis.page.PageConvert;
 import com.zumin.sudoku.common.mybatis.page.PageParam;
 import java.util.List;
 import java.util.function.Function;
+import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 /**
  * 分页工具类
  */
-@Component
+@UtilityClass
 public class PageUtils {
 
   /**
    * 最大分页条数
    */
-  private static final int MAX_PAGE_SIZE = 20;
+  private final int MAX_PAGE_SIZE = 20;
   /**
    * 每页显示条数的参数名称
    */
-  private static final String PAGE_SIZE_NAME = "pageSize";
+  private final String PAGE_SIZE_NAME = "pageSize";
   /**
    * 默认查询的页数
    */
-  private static final Integer DEFAULT_PAGE = 1;
+  private final int DEFAULT_PAGE = 1;
   /**
    * 默认每页个数
    */
-  private static final Integer DEFAULT_PAGE_SIZE = 5;
+  private final int DEFAULT_PAGE_SIZE = 5;
   /**
    * 当前查询页的参数名称
    */
-  private static final String PAGE_NAME = "page";
-
-  /**
-   * 私有构造方法，防止实例化
-   */
-  private PageUtils() {
-  }
+  private final String PAGE_NAME = "page";
 
   /**
    * 获取分页数据
@@ -55,7 +50,7 @@ public class PageUtils {
    * @param <T>       源数据类型
    * @return 分页数据
    */
-  public static <T> Page<T> getPage(@NotNull PageParam<T> pageParam) {
+  public <T> Page<T> getPage(@NotNull PageParam<T> pageParam) {
     PageTemplateMethod<T> pageTemplateMethod = new PageTemplateMethod<>(pageParam);
     return pageTemplateMethod.getPage(PageInfo::of);
   }
@@ -70,7 +65,7 @@ public class PageUtils {
    * @return 分页数据
    */
   @SuppressWarnings("all")
-  public static <T, V> Page<V> getPage(@NotNull PageParam<T> pageParam, @NotNull Function<T, V> converter) {
+  public <T, V> Page<V> getPage(@NotNull PageParam<T> pageParam, @NotNull Function<T, V> converter) {
     PageTemplateMethod<T> pageTemplateMethod = new PageTemplateMethod<>(pageParam);
     return (Page<V>) pageTemplateMethod.getPage(queryList -> {
       List<V> targetList = queryList.stream().map(converter).collect(toList());

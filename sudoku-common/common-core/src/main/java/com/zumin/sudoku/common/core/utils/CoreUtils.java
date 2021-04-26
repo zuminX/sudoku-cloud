@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class CoreUtils {
 
   public static String projectPackageName;
+
   private final Environment env;
 
   /**
