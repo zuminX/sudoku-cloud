@@ -42,6 +42,12 @@
       <artifactId>spring-cloud-starter-loadbalancer</artifactId>
     </dependency>
 
+    <!-- springboot 健康端点 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
     <!-- OAuth2资源服务器-->
     <dependency>
       <groupId>org.springframework.security</groupId>
