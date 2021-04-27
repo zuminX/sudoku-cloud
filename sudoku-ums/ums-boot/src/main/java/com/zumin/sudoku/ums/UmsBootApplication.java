@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients(basePackageClasses = {OAuthFeign.class})
-@SpringBootApplication(scanBasePackages = {"com.zumin.sudoku.ums", "com.zumin.sudoku.common"})
+@SpringBootApplication
 public class UmsBootApplication {
 
   public static void main(String[] args) {

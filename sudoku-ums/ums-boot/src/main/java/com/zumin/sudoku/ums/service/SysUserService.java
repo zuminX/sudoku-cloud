@@ -126,4 +126,13 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     }
   }
 
+  /**
+   * 更新头像地址
+   *
+   * @param avatarPath 头像地址
+   * @param userId 用户ID
+   */
+  public void updateAvatar(String avatarPath, Long userId) {
+    update(Wrappers.lambdaUpdate(SysUser.class).set(SysUser::getAvatar, avatarPath).eq(SysUser::getId, userId));
+  }
 }

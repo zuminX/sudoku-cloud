@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients
-@SpringBootApplication(scanBasePackages = {"com.zumin.sudoku.game", "com.zumin.sudoku.common"})
+@SpringBootApplication
 public class GameBootApplication {
 
   public static void main(String[] args) {

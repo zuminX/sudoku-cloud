@@ -14,3 +14,5 @@ spring:
           - data-id: redis.yaml
           - data-id: datasource.yaml
           - data-id: openfeign.yaml
+system:
+  addr: http://47.116.68.80:9999/ums

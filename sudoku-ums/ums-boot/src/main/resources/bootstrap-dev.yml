@@ -16,3 +16,5 @@ spring:
           - data-id: mybatis.yaml
           - data-id: openfeign.yaml
           - data-id: endpoints.yaml
+system:
+  addr: http://sudoku.cn1.utools.club/ums

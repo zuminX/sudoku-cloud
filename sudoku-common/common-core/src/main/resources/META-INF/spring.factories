@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.zumin.sudoku.common.core.config.CommonCoreProperties,\
+  com.zumin.sudoku.common.core.utils.CoreUtils

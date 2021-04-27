@@ -3,6 +3,8 @@ spring:
     active: dev
   application:
     name: sudoku-gateway
+  main:
+    allow-bean-definition-overriding: true
 
 common:
   core:

@@ -23,7 +23,7 @@ public class CoreUtils {
    *
    * @return Class集合
    */
-  public static Set<Class<?>> getClasses() {
+  public Set<Class<?>> getClasses() {
     return ClassUtil.scanPackage(projectPackageName);
   }
 

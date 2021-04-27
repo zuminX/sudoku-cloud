@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients(basePackageClasses = {UserFeign.class})
-@SpringBootApplication(scanBasePackages = {"com.zumin.sudoku.auth", "com.zumin.sudoku.common"})
+@SpringBootApplication
 public class AuthBootApplication {
 
   public static void main(String[] args) {

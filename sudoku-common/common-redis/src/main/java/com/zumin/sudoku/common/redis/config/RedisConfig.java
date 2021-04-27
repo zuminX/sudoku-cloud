@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +37,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 public class RedisConfig {
+
+  @Autowired
+  private CoreUtils coreUtils;
 
   /**
    * 设置Redis模板
@@ -104,7 +108,7 @@ public class RedisConfig {
    */
   private Map<String, RedisCacheConfiguration> getRedisCacheConfigurationMap() {
     Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
-    CoreUtils.getClasses().forEach(clazz -> Arrays.stream(clazz.getMethods())
+    coreUtils.getClasses().forEach(clazz -> Arrays.stream(clazz.getMethods())
         .map(method -> AnnotationUtils.getAnnotation(method, ExtCacheable.class))
         .filter(Objects::nonNull)
         .forEach(extCacheable -> {

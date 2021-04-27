@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.zumin.sudoku.gateway", "com.zumin.sudoku.common"})
+@SpringBootApplication
 public class SudokuGatewayApplication {
 
   public static void main(String[] args) {

@@ -46,11 +46,6 @@ public interface AuthConstants {
   String SELECT_CLIENT_DETAILS_SQL = BASE_CLIENT_DETAILS_SQL + " where client_id = ?";
 
   /**
-   * 密码加密方式
-   */
-  String BCRYPT = "{bcrypt}";
-
-  /**
    * JWT存储权限前缀
    */
   String AUTHORITY_PREFIX = "ROLE_";

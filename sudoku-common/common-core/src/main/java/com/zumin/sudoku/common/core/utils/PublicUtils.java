@@ -48,7 +48,6 @@ public class PublicUtils {
     return Arrays.stream(list).map(ArrayUtil::wrap).toArray(Integer[][]::new);
   }
 
-
   public Boolean[][] wrap(boolean[][] list) {
     return Arrays.stream(list).map(ArrayUtil::wrap).toArray(Boolean[][]::new);
   }

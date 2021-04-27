@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients
-@SpringBootApplication(scanBasePackages = {"com.zumin.sudoku.admin", "com.zumin.sudoku.common"})
+@SpringBootApplication
 public class AdminBootApplication {
 
   public static void main(String[] args) {

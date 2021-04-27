@@ -1,6 +1,5 @@
 package com.zumin.sudoku.common.web.handler;
 
-
 import com.zumin.sudoku.common.web.domain.CustomEditorInfo;
 import com.zumin.sudoku.common.web.enums.StatisticsDate;
 import java.util.Collections;

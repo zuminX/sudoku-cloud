@@ -20,6 +20,11 @@
       <artifactId>auth-api</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-alicloud</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>
