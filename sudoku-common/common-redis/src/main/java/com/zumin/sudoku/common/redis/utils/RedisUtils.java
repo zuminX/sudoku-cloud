@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.BoundZSetOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Component;
 
@@ -77,12 +77,28 @@ public class RedisUtils {
    * @param key 缓存键值
    * @return 缓存键值对应的数据
    */
+  @SneakyThrows
   public <T> T get(String key) {
+    return (T) get(key, Object.class);
+  }
+
+  /**
+   * 获得缓存对象
+   *
+   * @param key   缓存键值
+   * @param clazz 数据类型
+   * @return 缓存键值对应的数据
+   */
+  @SneakyThrows
+  public <T> T get(String key, Class<T> clazz) {
     if (isKeyNull(key)) {
       return null;
     }
-    ValueOperations<String, T> operation = redisTemplate.opsForValue();
-    return operation.get(key);
+    Object result = redisTemplate.opsForValue().get(key);
+    if (clazz == Long.class && result instanceof Integer) {
+      return (T) Long.valueOf(String.valueOf(result));
+    }
+    return (T) result;
   }
 
   /**
@@ -95,6 +111,29 @@ public class RedisUtils {
       return;
     }
     redisTemplate.delete(key);
+  }
+
+  /**
+   * 获得缓存对象，并删除该缓存键
+   *
+   * @param key 缓存键值
+   * @return 缓存键值对应的数据
+   */
+  public <T> T getAndDelete(String key) {
+    return (T) getAndDelete(key, Object.class);
+  }
+
+  /**
+   * 获得缓存对象，并删除该缓存键
+   *
+   * @param key   缓存键值
+   * @param clazz 数据类型
+   * @return 缓存键值对应的数据
+   */
+  public <T> T getAndDelete(String key, Class<T> clazz) {
+    T result = get(key, clazz);
+    delete(key);
+    return result;
   }
 
   /**

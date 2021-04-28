@@ -71,6 +71,16 @@ public class OSSService {
    * @return 上传的回调结果
    */
   public <T> OSSCallbackResult<T> resolveCallbackData() {
+    return (OSSCallbackResult<T>) resolveCallbackData(Object.class);
+  }
+
+  /**
+   * 从请求中解析回调结果
+   *
+   * @param clazz 数据类型
+   * @return 上传的回调结果
+   */
+  public <T> OSSCallbackResult<T> resolveCallbackData(Class<T> clazz) {
     HttpServletRequest request = ServletUtils.getRequest();
     OSSCallbackResult<T> oosCallback = new OSSCallbackResult<>();
     oosCallback.setFilePath(getHost() + "/" + request.getParameter("filename"));
@@ -78,7 +88,7 @@ public class OSSService {
     oosCallback.setMimeType(request.getParameter("mimeType"));
     String key = request.getParameter(CALLBACK_DATA_PARAMETER_NAME);
     if (StrUtil.isNotBlank(key)) {
-      oosCallback.setCallbackData(redisUtils.get(key));
+      oosCallback.setCallbackData(redisUtils.getAndDelete(key, clazz));
     }
     return oosCallback;
   }

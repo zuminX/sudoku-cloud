@@ -34,4 +34,11 @@ public class OSSCallbackParameter<T> {
    * 回调数据的过期时间
    */
   private long timeout;
+
+  public OSSCallbackParameter(String callbackPath, T data) {
+    this.callbackPath = callbackPath;
+    this.data = data;
+    this.timeout = 10;
+    this.timeUnit = TimeUnit.MINUTES;
+  }
 }
