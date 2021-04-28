@@ -71,6 +71,18 @@
       <artifactId>spring-security-crypto</artifactId>
     </dependency>
 
+    <!-- 链路追踪 -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-zipkin</artifactId>
+    </dependency>
+
+    <!-- 链路追踪 对 MySQL 的支持 -->
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-instrumentation-mysql8</artifactId>
+    </dependency>
+
     <!-- 解决部署到Linux中出现NoClassDefFoundError: javax/xml/bind/DatatypeConverter的异常 -->
     <dependency>
       <groupId>javax.xml.bind</groupId>

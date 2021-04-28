@@ -24,7 +24,6 @@
     <module>sudoku-game</module>
     <module>sudoku-admin</module>
     <module>sudoku-monitor</module>
-    <module>common-alicloud</module>
   </modules>
 
   <properties>
