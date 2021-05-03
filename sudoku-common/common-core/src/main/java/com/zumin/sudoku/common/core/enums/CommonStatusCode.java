@@ -14,6 +14,7 @@ public enum CommonStatusCode implements StatusCode {
   OK(0, "成功请求"),
   ERROR(1, "服务端发生了未知错误"),
   UNAUTHORIZED_ACCESS(2, "非法访问"),
+  ACCESS_DENIED(3, "访问流量过大"),
 
   INVALID_REQUEST_PARAM_ERROR(10, "请求参数不合法"),
   FORM_PARAMETER_CONVERSION_ERROR(11, "请求参数不合法"),

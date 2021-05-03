@@ -55,12 +55,13 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- openfeign依赖 1. http客户端选择okhttp 2. loadbalancer替换ribbon -->
+    <!-- openfeign依赖 -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
 
+    <!-- 使用OKHTTP作为Feign的HTTP调用客户端 -->
     <dependency>
       <groupId>io.github.openfeign</groupId>
       <artifactId>feign-okhttp</artifactId>
@@ -81,6 +82,18 @@
     <dependency>
       <groupId>io.zipkin.brave</groupId>
       <artifactId>brave-instrumentation-mysql8</artifactId>
+    </dependency>
+
+    <!-- 服务容错 -->
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+    </dependency>
+
+    <!-- Sentinel 对 Nacos 作为数据源的支持 -->
+    <dependency>
+      <groupId>com.alibaba.csp</groupId>
+      <artifactId>sentinel-datasource-nacos</artifactId>
     </dependency>
 
     <!-- 解决部署到Linux中出现NoClassDefFoundError: javax/xml/bind/DatatypeConverter的异常 -->

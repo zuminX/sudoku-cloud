@@ -17,3 +17,4 @@ spring:
           - data-id: openfeign.yaml
           - data-id: endpoints.yaml
           - data-id: sleuth.yaml
+          - data-id: sentinel.yaml

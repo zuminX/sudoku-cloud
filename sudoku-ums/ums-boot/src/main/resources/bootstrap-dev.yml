@@ -17,5 +17,6 @@ spring:
           - data-id: openfeign.yaml
           - data-id: endpoints.yaml
           - data-id: sleuth.yaml
+          - data-id: sentinel.yaml
 system:
   addr: http://sudoku.cn1.utools.club/ums

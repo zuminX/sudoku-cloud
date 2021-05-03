@@ -34,14 +34,13 @@
     <docker.host>http://localhost:2375</docker.host>
     <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
+    <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
     <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
     <mapstruct.version>1.4.1.Final</mapstruct.version>
     <lombok.version>1.18.12</lombok.version>
     <knife4j-micro.version>2.0.4</knife4j-micro.version>
     <knife4j.version>2.0.8</knife4j.version>
     <hutool.version>5.4.3</hutool.version>
-    <maven-surefire.version>2.22.2</maven-surefire.version>
     <maven-compiler.version>3.8.1</maven-compiler.version>
     <xxl-job-core.version>2.2.0</xxl-job-core.version>
     <powermock.version>2.0.2</powermock.version>
@@ -52,7 +51,6 @@
     <spring-boot-maven-plugin.version>2.3.3.RELEASE</spring-boot-maven-plugin.version>
     <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
   </properties>
-
 
   <dependencies>
     <!-- SpringBoot 测试 -->
@@ -248,5 +246,87 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler.version}</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+              </path>
+
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+              </path>
+            </annotationProcessorPaths>
+            <compilerArgs>
+              <arg>-Amapstruct.defaultComponentModel=spring</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+        <plugin>
+          <groupId>com.spotify</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>${docker.maven.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>build-image</id>
+              <phase>package</phase>
+              <goals>
+                <goal>build</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <imageName>sudoku/${project.artifactId}:${project.version}</imageName>
+
+            <!-- 基础镜像-->
+            <baseImage>openjdk:11.0.11-oraclelinux7</baseImage>
+
+            <!-- 切换到容器工作目录-->
+            <workdir>/</workdir>
+
+            <!-- 指定远程 Docker API地址  -->
+            <dockerHost>http://192.168.50.110:2375</dockerHost>
+
+            <entryPoint>["java", "-jar", "-Dspring.profiles.active=dev","${project.build.finalName}.jar"]</entryPoint>
+            <resources>
+              <resource>
+                <targetPath>/</targetPath>
+                <!-- 用于指定需要复制的根目录，${project.build.directory}表示target目录 -->
+                <directory>${project.build.directory}</directory>
+                <!-- 用于指定需要复制的文件，${project.build.finalName}.jar就是打包后的target目录下的jar包名称　-->
+                <include>${project.build.finalName}.jar</include>
+              </resource>
+            </resources>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>javax.activation</groupId>
+              <artifactId>activation</artifactId>
+              <version>1.1.1</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
 
 </project>

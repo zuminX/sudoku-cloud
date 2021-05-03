@@ -4,6 +4,8 @@ import static com.zumin.sudoku.common.core.enums.CommonStatusCode.ERROR;
 import static com.zumin.sudoku.common.core.enums.CommonStatusCode.INVALID_REQUEST_PARAM_ERROR;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.zumin.sudoku.common.core.enums.CommonStatusCode;
 import com.zumin.sudoku.common.core.exception.BaseException;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.web.exception.FormParameterConversionException;
@@ -52,6 +54,18 @@ public class GlobalExceptionHandler {
   public CommonResult<BaseException> baseExceptionHandler(BaseException e) {
     log.debug("[" + e.getClass().getSimpleName() + "]", e);
     return CommonResult.error(e.getStatusCode());
+  }
+
+  /**
+   * 处理流量控制异常
+   *
+   * @param e 异常
+   * @return 经过包装的结果对象
+   */
+  @ExceptionHandler(value = BlockException.class)
+  public CommonResult<BlockException> baseExceptionHandler(BlockException e) {
+    log.debug("[" + e.getClass().getSimpleName() + "]", e);
+    return CommonResult.error(CommonStatusCode.ACCESS_DENIED);
   }
 
   /**
