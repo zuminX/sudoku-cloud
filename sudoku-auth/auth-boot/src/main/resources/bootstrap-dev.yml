@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: nacos:8848
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yaml
@@ -17,3 +17,4 @@ spring:
           - data-id: endpoints.yaml
           - data-id: sleuth.yaml
           - data-id: sentinel.yaml
+          - data-id: logging.yaml

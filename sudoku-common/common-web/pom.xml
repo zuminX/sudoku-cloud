@@ -96,6 +96,12 @@
       <artifactId>sentinel-datasource-nacos</artifactId>
     </dependency>
 
+    <!-- 日志 -->
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+    </dependency>
+
     <!-- 解决部署到Linux中出现NoClassDefFoundError: javax/xml/bind/DatatypeConverter的异常 -->
     <dependency>
       <groupId>javax.xml.bind</groupId>

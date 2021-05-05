@@ -1,5 +1,6 @@
 package com.zumin.sudoku.common.core.utils;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.zumin.sudoku.common.core.utils.functional.QuadrConsumer;
 import com.zumin.sudoku.common.core.utils.functional.TriConsumer;
 import java.util.List;
@@ -58,7 +59,7 @@ public class TwoDimensionalListUtils {
    */
   public <T, U> void forEachIfNotEquals(@NotNull T[][] list1, @NotNull List<List<U>> list2,
       @NotNull QuadrConsumer<Integer, Integer, T, U> consumer) {
-    forEach(list1, list2, consumer.condition((i, j, t, u) -> t == null ? u == null : u != null && !t.equals(u)));
+    forEach(list1, list2, consumer.condition((i, j, t, u) -> ObjectUtil.notEqual(t, u)));
   }
 
   /**

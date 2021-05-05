@@ -6,7 +6,6 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-
 common:
   core:
     projectPackage: 'com.zumin.sudoku.gateway'

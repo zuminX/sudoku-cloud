@@ -5,7 +5,7 @@ spring:
   main:
     web-application-type: reactive
   zipkin:
-    base-url: http://localhost:9411
+    base-url: http://zipkin:9411
   sleuth:
     web:
       enabled: true
@@ -14,7 +14,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: nacos:8848
       # 配置中心
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
@@ -23,3 +23,4 @@ spring:
         shared-configs:
           - data-id: redis.yaml
           - data-id: endpoints.yaml
+          - data-id: logging.yaml
