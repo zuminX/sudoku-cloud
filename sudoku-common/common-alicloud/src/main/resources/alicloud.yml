@@ -1,8 +1,0 @@
-alicloud:
-  access-key-id: LTAI5t5u8W4ZPWDGtz5Wbc8x
-  secret-key-secret: BNSCEDfNPegUFt6pspmOrmHb4JWH7H
-  oss:
-    endpoint: oss-cn-shanghai.aliyuncs.com
-    bucket-name: sudoku-zumin
-    policy:
-      expire: 300

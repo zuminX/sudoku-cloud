@@ -13,16 +13,28 @@
   <dependencies>
     <dependency>
       <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-mybatis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-alicloud</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
       <artifactId>ums-api</artifactId>
     </dependency>
     <dependency>
       <groupId>com.zumin.sudoku</groupId>
       <artifactId>auth-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.zumin.sudoku</groupId>
-      <artifactId>common-alicloud</artifactId>
     </dependency>
 
   </dependencies>

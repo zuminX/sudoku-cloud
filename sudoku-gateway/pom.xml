@@ -73,6 +73,12 @@
       <artifactId>knife4j-spring-boot-starter</artifactId>
     </dependency>
 
+    <!-- 日志 -->
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+    </dependency>
+
     <!-- 服务发现 -->
     <dependency>
       <groupId>com.alibaba.cloud</groupId>

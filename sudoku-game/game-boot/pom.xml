@@ -17,6 +17,19 @@
   <dependencies>
     <dependency>
       <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
+      <artifactId>common-mybatis</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zumin.sudoku</groupId>
       <artifactId>game-api</artifactId>
       <version>${game.api.version}</version>
     </dependency>

@@ -37,7 +37,7 @@ public class SudokuService {
   public GameDataBO generateSudokuTopic(GameLevel gameLevel, Boolean isRecord) {
     GameDataBO gameDataBO = SudokuBuilder.generateSudokuFinal(gameLevel.getMinEmpty(), gameLevel.getMaxEmpty());
     saveGameRecord(gameDataBO, gameLevel.getId(), isRecord);
-    return hideVacancyGrid(gameDataBO);
+    return gameDataBO.hideVacancyGrid();
   }
 
   /**
@@ -71,15 +71,6 @@ public class SudokuService {
         .matrix(gameDataBO.getMatrix())
         .spendTime(DateUtils.computeAbsDiff(sudokuRecord.getEndTime(), sudokuRecord.getStartTime()))
         .build();
-  }
-
-  /**
-   * 隐藏空缺的格子信息
-   *
-   * @return 隐藏后的数独数据对象
-   */
-  private GameDataBO hideVacancyGrid(GameDataBO sudokuData) {
-    return new GameDataBO(SudokuUtils.setVacancyGridToZero(sudokuData.getMatrix(), sudokuData.getHoles()), PublicUtils.deepClone(sudokuData.getHoles()));
   }
 
   /**

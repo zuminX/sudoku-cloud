@@ -63,6 +63,8 @@ public class GameNormalRecordService extends ServiceImpl<GameNormalRecordMapper,
   public void saveNowGame() {
     GameNormalRecord gameNormalRecord = GameNormalRecord.builder()
         .userId(SecurityUtils.getUserId())
+        //TODO 待优化
+        .answer(PublicUtils.compressionIntArray(gameUtils.getGameRecord().getGameData().hideVacancyGrid().getMatrix()))
         .recordId(gameUtils.getGameRecord().getId())
         .build();
     save(gameNormalRecord);

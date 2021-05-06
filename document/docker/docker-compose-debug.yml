@@ -4,21 +4,21 @@ services:
     image: sudoku/admin-boot:1.0.0
     container_name: sudoku-admin
     environment:
-      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m
+      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5001
     ports:
       - 8200:8200
+      - 5005:5005
     external_links:
       - mysql:db
       - nacos:nacos
       - redis:redis
       - sentinel:sentinel
       - zipkin:zipkin
-      - logstash:logstash
   sudoku-auth:
     image: sudoku/auth-boot:1.0.0
     container_name: sudoku-auth
     environment:
-      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m
+      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5002
     ports:
       - 8000:8000
     external_links:
@@ -31,7 +31,7 @@ services:
     image: sudoku/game-boot:1.0.0
     container_name: sudoku-game
     environment:
-      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m
+      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5003
     ports:
       - 8300:8300
     external_links:
@@ -44,7 +44,7 @@ services:
     image: sudoku/sudoku-gateway:1.0.0
     container_name: sudoku-gateway
     environment:
-      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m
+      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5004
     ports:
       - 9999:9999
     external_links:
@@ -58,7 +58,7 @@ services:
     image: sudoku/sudoku-monitor:1.0.0
     container_name: sudoku-monitor
     environment:
-      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m
+      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     ports:
       - 7000:7000
     external_links:
@@ -67,7 +67,7 @@ services:
     image: sudoku/ums-boot:1.0.0
     container_name: sudoku-ums
     environment:
-      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m
+      - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
     ports:
       - 8100:8100
     external_links:
