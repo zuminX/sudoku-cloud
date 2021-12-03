@@ -149,9 +149,9 @@ public class PublicUtils {
   public void randomizedArray(boolean[][] array) {
     for (int row = array.length, column = array[0].length, i = row * column - 1; i > 0; i--) {
       int random = getRandomInt(0, i);
-      boolean temp = array[i / row][i % column];
-      array[i / row][i % column] = array[random / row][random % column];
-      array[random / row][random % column] = temp;
+      boolean temp = array[i / column][i % column];
+      array[i / column][i % column] = array[random / column][random % column];
+      array[random / column][random % column] = temp;
     }
   }
 

@@ -1,6 +1,7 @@
 package com.zumin.sudoku.auth;
 
-import com.zumin.sudoku.admin.feign.UserFeign;
+
+import com.zumin.sudoku.ums.feign.UserFeign;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

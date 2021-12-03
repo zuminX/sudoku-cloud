@@ -42,6 +42,11 @@
       <artifactId>mapstruct</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok-mapstruct-binding</artifactId>
+    </dependency>
+
     <!-- 使Jackson支持JSR310标准 -->
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>

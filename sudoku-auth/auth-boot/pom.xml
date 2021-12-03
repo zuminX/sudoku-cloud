@@ -30,7 +30,7 @@
     </dependency>
     <dependency>
       <groupId>com.zumin.sudoku</groupId>
-      <artifactId>admin-api</artifactId>
+      <artifactId>ums-api</artifactId>
     </dependency>
 
     <dependency>

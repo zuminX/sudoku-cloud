@@ -82,7 +82,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
    */
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) {
-    /*security.allowFormAuthenticationForClients();*/
     CustomClientCredentialsTokenEndpointFilter endpointFilter = new CustomClientCredentialsTokenEndpointFilter(security);
     endpointFilter.afterPropertiesSet();
     endpointFilter.setAuthenticationEntryPoint(authenticationEntryPoint());

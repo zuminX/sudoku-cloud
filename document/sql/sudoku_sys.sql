@@ -44,8 +44,8 @@ CREATE TABLE `sys_user`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `sys_user`
-VALUES (null, 'test1', '$2a$10$VaphyIrQ7C9aELKTx/Wh1.QqGVvBymhd57NrY/OoQhuAjMgNMoEO6', '测试管理员', NULL, NOW(), NOW(), 1),
-       (null, 'test2', '$2a$10$VaphyIrQ7C9aELKTx/Wh1.QqGVvBymhd57NrY/OoQhuAjMgNMoEO6', '测试用户', NULL, NOW(), NOW(), 1);
+VALUES (null, 'test1', '{bcrypt}$2a$10$VaphyIrQ7C9aELKTx/Wh1.QqGVvBymhd57NrY/OoQhuAjMgNMoEO6', '测试管理员', NULL, NOW(), NOW(), 1),
+       (null, 'test2', '{bcrypt}$2a$10$VaphyIrQ7C9aELKTx/Wh1.QqGVvBymhd57NrY/OoQhuAjMgNMoEO6', '测试用户', NULL, NOW(), NOW(), 1);
 
 
 DROP TABLE IF EXISTS `sys_user_role`;

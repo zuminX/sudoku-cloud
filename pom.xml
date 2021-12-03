@@ -22,7 +22,6 @@
     <module>sudoku-ums</module>
     <module>sudoku-auth</module>
     <module>sudoku-game</module>
-    <module>sudoku-admin</module>
     <module>sudoku-monitor</module>
   </modules>
 
@@ -36,8 +35,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
     <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
-    <mapstruct.version>1.4.1.Final</mapstruct.version>
-    <lombok.version>1.18.12</lombok.version>
+    <mapstruct.version>1.5.0.Beta1</mapstruct.version>
+    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+    <lombok.version>1.18.22</lombok.version>
     <knife4j-micro.version>2.0.4</knife4j-micro.version>
     <knife4j.version>2.0.8</knife4j.version>
     <hutool.version>5.4.3</hutool.version>
@@ -50,6 +50,7 @@
     <mockito-core.version>3.6.0</mockito-core.version>
     <spring-boot-maven-plugin.version>2.3.3.RELEASE</spring-boot-maven-plugin.version>
     <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
+    <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
   </properties>
 
   <dependencies>
@@ -184,19 +185,6 @@
         <version>${sudoku.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>com.zumin.sudoku</groupId>
-        <artifactId>admin-api</artifactId>
-        <version>${sudoku.version}</version>
-      </dependency>
-
-      <!-- 类型转换工具 -->
-      <dependency>
-        <groupId>org.mapstruct</groupId>
-        <artifactId>mapstruct</artifactId>
-        <version>${mapstruct.version}</version>
-      </dependency>
-
       <!-- Spring Boot 应用监控工具客户端 -->
       <dependency>
         <groupId>de.codecentric</groupId>
@@ -231,6 +219,19 @@
         <version>${hutool.version}</version>
       </dependency>
 
+      <!-- 类型转换工具 -->
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok-mapstruct-binding</artifactId>
+        <version>${lombok-mapstruct-binding.version}</version>
+      </dependency>
+
       <!-- xxl-job 任务调度平台 -->
       <dependency>
         <groupId>com.xuxueli</groupId>
@@ -243,6 +244,13 @@
         <groupId>com.nimbusds</groupId>
         <artifactId>nimbus-jose-jwt</artifactId>
         <version>${nimbus-jose-jwt.version}</version>
+      </dependency>
+
+      <!-- ELK -->
+      <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>${logstash-logback-encoder.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -264,11 +272,15 @@
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct.version}</version>
               </path>
-
               <path>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+              </path>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>${lombok-mapstruct-binding.version}</version>
               </path>
             </annotationProcessorPaths>
             <compilerArgs>
@@ -297,7 +309,7 @@
             <imageName>sudoku/${project.artifactId}:${project.version}</imageName>
 
             <!-- 基础镜像-->
-            <baseImage>openjdk:11.0.11-oraclelinux7</baseImage>
+            <baseImage>openjdk:11.0.13-oraclelinux7</baseImage>
 
             <!-- 切换到容器工作目录-->
             <workdir>/</workdir>

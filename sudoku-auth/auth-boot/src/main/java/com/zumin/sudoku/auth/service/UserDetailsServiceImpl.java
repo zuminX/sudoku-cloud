@@ -1,13 +1,13 @@
 package com.zumin.sudoku.auth.service;
 
 
-import com.zumin.sudoku.admin.dto.UserDTO;
-import com.zumin.sudoku.admin.feign.UserFeign;
 import com.zumin.sudoku.auth.domain.User;
 import com.zumin.sudoku.common.core.auth.AuthConstants;
 import com.zumin.sudoku.common.core.auth.AuthStatusCode;
 import com.zumin.sudoku.common.core.result.CommonResult;
 import com.zumin.sudoku.common.web.utils.SecurityUtils;
+import com.zumin.sudoku.ums.dto.UserDTO;
+import com.zumin.sudoku.ums.feign.UserFeign;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.DisabledException;

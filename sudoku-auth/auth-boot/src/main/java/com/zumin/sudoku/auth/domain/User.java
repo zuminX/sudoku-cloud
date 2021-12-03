@@ -1,9 +1,8 @@
 package com.zumin.sudoku.auth.domain;
 
-
 import cn.hutool.core.collection.CollUtil;
-import com.zumin.sudoku.admin.dto.UserDTO;
 import com.zumin.sudoku.common.core.auth.AuthConstants;
+import com.zumin.sudoku.ums.dto.UserDTO;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
