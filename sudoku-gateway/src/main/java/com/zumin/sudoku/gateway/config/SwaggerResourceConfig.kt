@@ -3,8 +3,7 @@ package com.zumin.sudoku.gateway.config
 import mu.KotlinLogging
 import org.springframework.cloud.gateway.config.GatewayProperties
 import org.springframework.cloud.gateway.route.RouteLocator
-import org.springframework.cloud.gateway.support.NameUtils
-import org.springframework.cloud.gateway.support.NameUtils.*
+import org.springframework.cloud.gateway.support.NameUtils.GENERATED_NAME_PREFIX
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 import springfox.documentation.swagger.web.SwaggerResource

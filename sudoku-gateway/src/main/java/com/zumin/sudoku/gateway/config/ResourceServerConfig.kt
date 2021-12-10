@@ -3,7 +3,7 @@ package com.zumin.sudoku.gateway.config
 import com.zumin.sudoku.common.core.auth.AUTHORITY_PREFIX
 import com.zumin.sudoku.common.core.auth.JWT_AUTHORITIES_KEY
 import com.zumin.sudoku.common.core.code.AuthStatusCode
-import com.zumin.sudoku.gateway.utils.writeFailed
+import com.zumin.sudoku.gateway.writeFailed
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

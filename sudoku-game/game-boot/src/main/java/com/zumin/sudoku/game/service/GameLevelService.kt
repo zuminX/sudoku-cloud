@@ -25,7 +25,7 @@ class GameLevelService : ServiceImpl<GameLevelMapper, GameLevel>() {
    * @return 游戏难度ID列表
    */
   fun listGameLevelId(): List<Long> {
-    return listGameLevel().map { it.id!! }
+    return listGameLevel().map { it.id }
   }
 
 }

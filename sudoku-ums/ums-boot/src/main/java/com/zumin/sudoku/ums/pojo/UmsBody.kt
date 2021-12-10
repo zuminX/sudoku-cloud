@@ -5,7 +5,6 @@ import com.zumin.sudoku.common.web.validator.IsLocalDateTimeRange
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.hibernate.validator.constraints.Length
-import java.io.Serializable
 import java.time.LocalDateTime
 import javax.validation.constraints.*
 
@@ -32,11 +31,7 @@ data class AddUserBody(
   @ApiModelProperty("角色名列表")
   @NotEmpty(message = "用户至少要有一个角色")
   val roleNameList: MutableList<String>,
-) : Serializable {
-  companion object {
-    private const val serialVersionUID: Long = 7708470459434247132L
-  }
-}
+)
 
 @ApiModel("登录用户信息体类")
 data class LoginBody(
@@ -55,16 +50,12 @@ data class LoginBody(
   @ApiModelProperty(value = "唯一标识", required = true)
   @NotEmpty(message = "唯一标识不能为空")
   val uuid: String,
-) : Serializable {
-  companion object {
-    private const val serialVersionUID = 9125412007527553474L
-  }
-}
+)
 
 @ApiModel("修改用户信息体类")
 data class ModifyUserBody(
   @ApiModelProperty("用户ID")
-  @NotNull(message = "用户ID不能为空") @PositiveOrZero(message = "用户ID不能为负数")
+  @PositiveOrZero(message = "用户ID不能为负数")
   val id: Long,
   @ApiModelProperty("用户名")
   @Length(min = 4, max = 16, message = "用户名的长度为4-16位")
@@ -84,11 +75,7 @@ data class ModifyUserBody(
   @ApiModelProperty("角色名列表")
   @NotEmpty(message = "用户至少要有一个角色")
   val roleNameList: MutableList<String>,
-) : Serializable {
-  companion object {
-    private const val serialVersionUID = -2912099437520184948L
-  }
-}
+)
 
 @ApiModel("注册用户信息体类")
 data class RegisterUserBody(
@@ -101,7 +88,7 @@ data class RegisterUserBody(
   @Pattern(regexp = "^[0-9a-zA-Z]+$", message = "密码只能是数字和字母的组合")
   val password: String,
   @ApiModelProperty("用户昵称")
-   @Length(min = 4, max = 16, message = "昵称的长度为4-16位")
+  @Length(min = 4, max = 16, message = "昵称的长度为4-16位")
   val nickname: String,
   @ApiModelProperty("验证码")
   @Length(min = 4, max = 4, message = "验证码必须为4位")
@@ -110,11 +97,7 @@ data class RegisterUserBody(
   @ApiModelProperty("唯一标识")
   @NotEmpty(message = "唯一标识不能为空")
   val uuid: String,
-) : Serializable {
-  companion object {
-    private const val serialVersionUID = 7615402214779318417L
-  }
-}
+)
 
 @ApiModel("搜索用户信息体类")
 data class SearchUserBody(
@@ -132,8 +115,4 @@ data class SearchUserBody(
   val enabled: Boolean? = null,
   @ApiModelProperty("角色名列表")
   val roleNameList: List<String>? = null,
-) : Serializable {
-  companion object {
-    private const val serialVersionUID = -231977380846579412L
-  }
-}
+)

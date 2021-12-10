@@ -1,4 +1,4 @@
-package com.zumin.sudoku.common.web.utils
+package com.zumin.sudoku.common.web
 
 import cn.hutool.core.codec.Base64
 import cn.hutool.extra.spring.SpringUtil
@@ -43,7 +43,7 @@ fun getJwtPayload(): JSONObject {
  *
  * @return 用户ID
  */
-fun getCurrentUserId(): Long {
+fun getCurrentUserId(): Long? {
   return getJwtPayload().getLong(AUTH_USER_ID)
 }
 

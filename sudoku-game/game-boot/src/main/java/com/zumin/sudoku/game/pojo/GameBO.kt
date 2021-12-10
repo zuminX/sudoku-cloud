@@ -53,19 +53,19 @@ data class RankItemDataBO(
 @ApiModel("用户统计数据类")
 data class StatisticsUserDataBO(
   @ApiModelProperty("新增用户总数")
-  val newUserTotal: Int? = null,
+  val newUserTotal: Int,
   @ApiModelProperty("活跃用户总数")
-  val activeUserTotal: Int? = null,
+  val activeUserTotal: Int,
 )
 
 @ApiModel("数独格子信息业务类")
 data class SudokuGridInformationBO(
   @ApiModelProperty("行数")
-  val row: Int? = null,
+  val row: Int,
   @ApiModelProperty("列数")
-  val column: Int? = null,
+  val column: Int,
   @ApiModelProperty("对应格子的数值")
-  val value: Int? = null,
+  val value: Int,
 )
 
 @ApiModel("用户答题情况业务类")

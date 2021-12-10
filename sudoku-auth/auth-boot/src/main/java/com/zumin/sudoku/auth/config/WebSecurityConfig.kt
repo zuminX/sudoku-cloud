@@ -3,12 +3,10 @@ package com.zumin.sudoku.auth.config
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import kotlin.Throws
-import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.authentication.AuthenticationManager
-import java.lang.Exception
 
 /**
  * Web安全配置

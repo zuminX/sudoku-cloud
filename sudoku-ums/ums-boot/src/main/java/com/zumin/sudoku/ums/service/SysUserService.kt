@@ -10,9 +10,9 @@ import com.zumin.sudoku.common.core.auth.*
 import com.zumin.sudoku.common.mybatis.page.Page
 import com.zumin.sudoku.common.mybatis.page.PageParam
 import com.zumin.sudoku.common.mybatis.page.getPageData
+import com.zumin.sudoku.common.web.hasAdmin
 import com.zumin.sudoku.common.web.log.BusinessType
 import com.zumin.sudoku.common.web.log.Log
-import com.zumin.sudoku.common.web.utils.hasAdmin
 import com.zumin.sudoku.ums.UmsStatusCode
 import com.zumin.sudoku.ums.exception.UserException
 import com.zumin.sudoku.ums.mapper.SysUserMapper
@@ -76,7 +76,7 @@ class SysUserService(
      * 检查重新设置的用户名在数据库中是否已经存在
      */
     fun checkReUsername() {
-      val user = baseMapper.selectOne(KtQueryWrapper(SysUser()).eq(SysUser::username, modifyUserBody.username))
+      val user = baseMapper.selectOne(KtQueryWrapper(SysUser::class.java).eq(SysUser::username, modifyUserBody.username))
       if (user != null && user.id != modifyUserBody.id) {
         throw UserException(UmsStatusCode.USER_HAS_EQUAL_NAME)
       }
@@ -87,9 +87,9 @@ class SysUserService(
      * 更新用户的角色
      */
     fun updateRoleIdByUserId() {
-      val queryWrapper = KtQueryWrapper(SysRole()).select(SysRole::id).`in`(SysRole::name, modifyUserBody.roleNameList)
-      val userRoleList = roleService.list(queryWrapper).map { SysUserRole(modifyUserBody.id, it.id!!) }
-      userRoleService.remove(KtQueryWrapper(SysUserRole()).eq(SysUserRole::userId, modifyUserBody.id))
+      val queryWrapper = KtQueryWrapper(SysRole::class.java).select(SysRole::id).`in`(SysRole::name, modifyUserBody.roleNameList)
+      val userRoleList = roleService.list(queryWrapper).map { SysUserRole(userId = modifyUserBody.id, roleId = it.id!!) }
+      userRoleService.remove(KtQueryWrapper(SysUserRole::class.java).eq(SysUserRole::userId, modifyUserBody.id))
       userRoleService.saveBatch(userRoleList)
     }
     updateRoleIdByUserId()
@@ -110,8 +110,8 @@ class SysUserService(
      * 插入用户角色
      */
     fun insertUserRole() {
-      val userRoles = roleService.list(KtQueryWrapper(SysRole()).`in`(SysRole::name, addUserBody.roleNameList))
-        .map { SysUserRole(user.id!!, it.id!!) }
+      val userRoles = roleService.list(KtQueryWrapper(SysRole::class.java).`in`(SysRole::name, addUserBody.roleNameList))
+        .map { SysUserRole(userId = user.id!!, roleId = it.id!!) }
       userRoleService.saveBatch(userRoles)
     }
     insertUserRole()
@@ -135,8 +135,9 @@ class SysUserService(
      * @return 角色列表
      */
     fun insertUserRole(): List<SysRole> {
-      val roleList = roleService.list(KtQueryWrapper(SysRole()).`in`(SysRole::name, USER_ROLE_NAME))
-      val userRoles = roleList.map { SysUserRole(user.id!!, it.id!!) }
+      val wrapper = KtQueryWrapper(SysRole::class.java).`in`(SysRole::name, USER_ROLE_NAME)
+      val roleList = roleService.list(wrapper)
+      val userRoles = roleList.map { SysUserRole(userId = user.id!!, roleId = it.id!!) }
       userRoleService.saveBatch(userRoles)
       return roleList
     }
@@ -150,7 +151,8 @@ class SysUserService(
    * @param username 用户名
    */
   private fun checkUsername(username: String) {
-    if (baseMapper.selectOne(KtQueryWrapper(SysUser()).eq(SysUser::username, username)) != null) {
+    val wrapper = KtQueryWrapper(SysUser::class.java).eq(SysUser::username, username)
+    if (baseMapper.selectOne(wrapper) != null) {
       throw UserException(UmsStatusCode.USER_HAS_EQUAL_NAME)
     }
   }
@@ -201,8 +203,9 @@ class SysUserService(
    * @param avatarPath 头像地址
    * @param userId     用户ID
    */
-  fun updateAvatar(avatarPath : String, userId : Long) {
-    update(KtUpdateWrapper(SysUser()).set(SysUser::avatar, avatarPath).eq(SysUser::id, userId))
+  fun updateAvatar(avatarPath: String, userId: Long) {
+    val wrapper = KtUpdateWrapper(SysUser::class.java).set(SysUser::avatar, avatarPath).eq(SysUser::id, userId)
+    update(wrapper)
   }
 
   /**

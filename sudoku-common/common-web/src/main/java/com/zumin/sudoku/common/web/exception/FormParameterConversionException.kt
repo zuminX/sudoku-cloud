@@ -23,7 +23,7 @@ class FormParameterConversionException : BaseException {
   /**
    * 表单参数转换异常类的无参构造方法
    */
-  constructor() : super(CommonStatusCode.FORM_PARAMETER_CONVERSION_ERROR) {}
+  constructor() : super(CommonStatusCode.FORM_PARAMETER_CONVERSION_ERROR)
 
   /**
    * 表单参数转换异常类的构造方法
@@ -41,7 +41,7 @@ class FormParameterConversionException : BaseException {
    *
    * @param statusCode 状态编码
    */
-  constructor(statusCode: WebStatusCode) : super(statusCode) {}
+  constructor(statusCode: WebStatusCode) : super(statusCode)
 
   companion object {
     private const val serialVersionUID = 1166533932002631826L

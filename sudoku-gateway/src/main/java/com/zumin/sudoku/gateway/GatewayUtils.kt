@@ -1,4 +1,4 @@
-package com.zumin.sudoku.gateway.utils
+package com.zumin.sudoku.gateway
 
 import cn.hutool.json.JSONUtil
 import com.zumin.sudoku.common.core.CommonResult.Companion.error

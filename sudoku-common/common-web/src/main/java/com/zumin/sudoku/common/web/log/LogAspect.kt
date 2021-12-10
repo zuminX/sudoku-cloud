@@ -24,8 +24,7 @@ class LogAspect {
    * 配置织入点 处理所有带有Log注解的方法
    */
   @Pointcut("@annotation(com.zumin.sudoku.common.web.log.Log)")
-  fun logPointCut() {
-  }
+  fun logPointCut() = Unit
 
   /**
    * 环绕处理方法

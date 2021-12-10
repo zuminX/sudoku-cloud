@@ -20,7 +20,6 @@ val response = requestAttributes.response
 /**
  * 获取String参数
  *
- * @param defaultValue 默认值
  * @return 参数
  */
 fun String.getFromRequest(): String? {

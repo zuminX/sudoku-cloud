@@ -3,7 +3,7 @@ package com.zumin.sudoku.auth.service
 import com.zumin.sudoku.auth.domain.User
 import com.zumin.sudoku.common.core.auth.USER_CLIENT_ID
 import com.zumin.sudoku.common.core.code.AuthStatusCode
-import com.zumin.sudoku.common.web.utils.getAuthClientId
+import com.zumin.sudoku.common.web.getAuthClientId
 import com.zumin.sudoku.ums.UserFeign
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.DisabledException

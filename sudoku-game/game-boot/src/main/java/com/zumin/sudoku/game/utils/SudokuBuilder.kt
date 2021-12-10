@@ -3,7 +3,6 @@ package com.zumin.sudoku.game.utils
 import cn.hutool.core.util.RandomUtil
 import com.zumin.sudoku.common.core.utils.shuffle
 import com.zumin.sudoku.game.pojo.GameDataBO
-import java.util.*
 
 // 产生随机数组时的阈值
 private const val MAX_CALL_RANDOM_ARRAY_TIMES = 220

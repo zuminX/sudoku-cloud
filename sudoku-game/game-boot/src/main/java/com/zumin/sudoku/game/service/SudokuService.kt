@@ -26,7 +26,7 @@ class SudokuService(
    * @return 数独题目
    */
   fun generateSudokuTopic(gameLevel: GameLevel, isRecord: Boolean): GameDataBO {
-    val gameDataBO = generateSudokuFinal(gameLevel.minEmpty!!, gameLevel.maxEmpty!!)
+    val gameDataBO = generateSudokuFinal(gameLevel.minEmpty, gameLevel.maxEmpty)
     saveGameRecord(gameDataBO, gameLevel.id!!, isRecord)
     return gameDataBO.hideVacancyGrid()
   }

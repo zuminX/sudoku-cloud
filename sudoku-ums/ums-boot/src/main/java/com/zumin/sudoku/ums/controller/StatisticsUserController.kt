@@ -3,7 +3,7 @@ package com.zumin.sudoku.ums.controller
 import com.zumin.sudoku.common.web.ComRestController
 import com.zumin.sudoku.common.web.domain.LocalDateRange
 import com.zumin.sudoku.common.web.domain.StatisticsDateRange
-import com.zumin.sudoku.common.web.enums.StatisticsDate
+import com.zumin.sudoku.common.web.statistics.StatisticsDate
 import com.zumin.sudoku.ums.pojo.StatisticsUserDataBO
 import com.zumin.sudoku.ums.service.StatisticsUserService
 import io.swagger.annotations.ApiImplicitParam

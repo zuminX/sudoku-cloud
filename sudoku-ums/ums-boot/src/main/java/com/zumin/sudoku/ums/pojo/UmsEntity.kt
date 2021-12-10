@@ -4,173 +4,145 @@ import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import com.zumin.sudoku.common.core.NoArg
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 
+@NoArg
 @ApiModel("Oauth客户端详细信息")
 @TableName("oauth_client_details")
-class OauthClientDetails {
+data class OauthClientDetails(
   @ApiModelProperty("客户ID")
   @TableId(value = "client_id", type = IdType.AUTO)
-  var clientId: String? = null
-
+  var clientId: String? = null,
   @ApiModelProperty("资源ID")
   @TableField("resource_ids")
-  var resourceIds: String? = null
-
+  var resourceIds: String? = null,
   @ApiModelProperty("客户密钥")
   @TableField("client_secret")
-  var clientSecret: String? = null
-
+  var clientSecret: String,
   @ApiModelProperty("授权范围")
   @TableField("scope")
-  var scope: String? = null
-
+  var scope: String,
   @ApiModelProperty("授权类型")
   @TableField("authorized_grant_types")
-  var authorizedGrantTypes: String? = null
-
+  var authorizedGrantTypes: String,
   @ApiModelProperty("服务器重定向地址")
   @TableField("web_server_redirect_uri")
-  var webServerRedirectUri: String? = null
-
+  var webServerRedirectUri: String? = null,
   @ApiModelProperty("权限")
   @TableField("authorities")
-  var authorities: String? = null
-
+  var authorities: String? = null,
   @ApiModelProperty("访问令牌有效性")
   @TableField("access_token_validity")
-  var accessTokenValidity: Int? = null
-
+  var accessTokenValidity: Int,
   @ApiModelProperty("刷新令牌有效性")
   @TableField("refresh_token_validity")
-  var refreshTokenValidity: Int? = null
-
+  var refreshTokenValidity: Int,
   @ApiModelProperty("附加信息")
   @TableField("additional_information")
-  var additionalInformation: String? = null
-
+  var additionalInformation: String? = null,
   @ApiModelProperty("自动批准")
   @TableField("autoapprove")
-  var autoapprove: String? = null
-}
+  var autoapprove: String,
+)
 
+@NoArg
 @ApiModel("系统资源")
 @TableName("sys_resource")
-class SysResource {
+data class SysResource(
   @ApiModelProperty("资源ID")
   @TableId(value = "id", type = IdType.AUTO)
-  var id: Long? = null
-
+  var id: Long? = null,
   @ApiModelProperty("权限标识")
   @TableField("perms")
-  var perms: String? = null
-
+  var perms: String,
   @ApiModelProperty("请求方法类型")
   @TableField("method")
-  var method: String? = null
-
+  var method: String,
   @ApiModelProperty("资源名称")
   @TableField("name")
-  var name: String? = null
-
+  var name: String,
   @ApiModelProperty("拥有资源权限角色ID集合")
   @TableField(exist = false)
-  var roleIds: Set<Long>? = null
-}
+  var roleIds: Set<Long> = emptySet(),
+)
 
+@NoArg
 @ApiModel("系统资源角色")
 @TableName("sys_resource_role")
-class SysResourceRole {
+data class SysResourceRole(
   @TableId(value = "id", type = IdType.AUTO)
   @ApiModelProperty("资源角色ID")
-  var id: Long? = null
-
+  var id: Long? = null,
   @TableField("resource_id")
   @ApiModelProperty("资源ID")
-  var resourceId: Long? = null
-
+  var resourceId: Long,
   @TableField("role_id")
   @ApiModelProperty("角色ID")
-  var roleId: Long? = null
-}
+  var roleId: Long,
+)
 
+@NoArg
 @ApiModel("系统角色")
 @TableName("sys_role")
-class SysRole {
+data class SysRole(
   @ApiModelProperty("角色ID")
   @TableId(value = "id", type = IdType.AUTO)
-  var id: Long? = null
-
+  var id: Long? = null,
   @ApiModelProperty("角色名")
   @TableField("name")
-  var name: String? = null
-
+  var name: String,
   @ApiModelProperty("角色昵称")
   @TableField("nickname")
-  var nickname: String? = null
-}
+  var nickname: String,
+)
 
+@NoArg
 @ApiModel("系统用户")
 @TableName("sys_user")
-class SysUser {
+data class SysUser(
   @ApiModelProperty("用户ID")
   @TableId(value = "id", type = IdType.AUTO)
-  var id: Long? = null
-
+  var id: Long? = null,
   @ApiModelProperty("用户名")
   @TableField("username")
-  var username: String? = null
-
+  var username: String,
   @ApiModelProperty("密码")
   @TableField("password")
-  var password: String? = null
-
+  var password: String,
   @ApiModelProperty("昵称")
   @TableField("nickname")
-  var nickname: String? = null
-
+  var nickname: String,
   @ApiModelProperty("头像地址")
   @TableField("avatar")
-  var avatar: String? = null
-
+  var avatar: String? = null,
   @ApiModelProperty("创建时间")
   @TableField("create_time")
-  var createTime: LocalDateTime? = null
-
+  var createTime: LocalDateTime = LocalDateTime.now(),
   @ApiModelProperty("最近登录时间")
   @TableField("recent_login_time")
-  var recentLoginTime: LocalDateTime? = null
-
+  var recentLoginTime: LocalDateTime = LocalDateTime.now(),
   @ApiModelProperty("是否启用")
   @TableField("enabled")
-  var enabled: Int? = null
-
+  var enabled: Int = 1,
   @ApiModelProperty("角色列表")
   @TableField(exist = false)
-  var roleList: List<SysRole>? = null
-}
+  var roleList: List<SysRole> = emptyList(),
+)
 
+@NoArg
 @ApiModel("系统用户角色")
 @TableName(value = "sys_user_role")
-class SysUserRole {
+data class SysUserRole(
   @ApiModelProperty(value = "用户角色ID")
   @TableId(value = "id", type = IdType.AUTO)
-  var id: Long? = null
-
+  var id: Long? = null,
   @ApiModelProperty(value = "用户ID")
   @TableField(value = "user_id")
-  var userId: Long? = null
-
+  var userId: Long,
   @ApiModelProperty(value = "角色ID")
   @TableField(value = "role_id")
-  var roleId: Long? = null
-
-  constructor(userId: Long, roleId: Long) {
-    this.userId = userId
-    this.roleId = roleId
-  }
-
-  constructor()
-}
+  var roleId: Long,
+)

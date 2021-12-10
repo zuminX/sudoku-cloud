@@ -3,7 +3,7 @@ package com.zumin.sudoku.game.controller
 import com.zumin.sudoku.common.web.ComRestController
 import com.zumin.sudoku.common.web.domain.LocalDateRange
 import com.zumin.sudoku.common.web.domain.StatisticsDateRange
-import com.zumin.sudoku.common.web.enums.StatisticsDate
+import com.zumin.sudoku.common.web.statistics.StatisticsDate
 import com.zumin.sudoku.game.service.StatisticsGameService
 import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiOperation

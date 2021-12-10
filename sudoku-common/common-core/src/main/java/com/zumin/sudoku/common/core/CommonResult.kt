@@ -88,7 +88,7 @@ class CommonResult<T> : Serializable {
      */
     @JvmStatic
     fun <T> success(data: T, message: String?): CommonResult<T> {
-      return success<T>(data).apply { this.message = message }
+      return success(data).apply { this.message = message }
     }
   }
 }

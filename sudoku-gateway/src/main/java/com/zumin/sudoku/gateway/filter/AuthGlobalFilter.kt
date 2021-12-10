@@ -5,7 +5,7 @@ import com.nimbusds.jose.JWSObject
 import com.zumin.sudoku.common.core.auth.*
 import com.zumin.sudoku.common.core.code.AuthStatusCode
 import com.zumin.sudoku.common.redis.RedisUtils
-import com.zumin.sudoku.gateway.utils.writeFailed
+import com.zumin.sudoku.gateway.writeFailed
 import org.apache.logging.log4j.util.Strings
 import org.springframework.cloud.gateway.filter.GatewayFilterChain
 import org.springframework.cloud.gateway.filter.GlobalFilter

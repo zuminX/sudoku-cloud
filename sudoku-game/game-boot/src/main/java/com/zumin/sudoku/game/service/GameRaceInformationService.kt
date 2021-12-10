@@ -1,8 +1,7 @@
 package com.zumin.sudoku.game.service
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
-import com.zumin.sudoku.common.web.domain.LocalDateTimeRange
-import com.zumin.sudoku.common.web.utils.getCurrentUserId
+import com.zumin.sudoku.common.web.getCurrentUserId
 import com.zumin.sudoku.game.enums.GameStatusCode
 import com.zumin.sudoku.game.exception.GameRaceException
 import com.zumin.sudoku.game.mapper.GameRaceInformationMapper
@@ -36,7 +35,7 @@ class GameRaceInformationService : ServiceImpl<GameRaceInformationMapper, GameRa
     if (start!!.plus(MINIMUM_RACE_DURATION) > end || LocalDateTime.now().plus(MINIMUM_RACE_DURATION) > end) {
       throw GameRaceException(GameStatusCode.RACE_DURATION_TOO_SHORT)
     }
-    save(gameRaceInformationBody.toGameRaceInformation(getCurrentUserId()))
+    save(gameRaceInformationBody.toGameRaceInformation(getCurrentUserId()!!))
   }
 
   /**

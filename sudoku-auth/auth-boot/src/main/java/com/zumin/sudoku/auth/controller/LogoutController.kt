@@ -7,7 +7,7 @@ import com.zumin.sudoku.common.core.auth.JWT_JTI
 import com.zumin.sudoku.common.core.auth.TOKEN_BLACKLIST_PREFIX
 import com.zumin.sudoku.common.redis.RedisUtils
 import com.zumin.sudoku.common.web.ComRestController
-import com.zumin.sudoku.common.web.utils.getJwtPayload
+import com.zumin.sudoku.common.web.getJwtPayload
 import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.DeleteMapping
 import java.util.concurrent.TimeUnit

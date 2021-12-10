@@ -6,10 +6,6 @@ import com.aliyun.oss.OSS
 import com.aliyun.oss.common.utils.BinaryUtil
 import com.aliyun.oss.model.MatchMode
 import com.aliyun.oss.model.PolicyConditions
-import com.zumin.sudoku.common.alicloud.AliCloudProperties
-import com.zumin.sudoku.common.alicloud.OSSCallbackParameter
-import com.zumin.sudoku.common.alicloud.OSSCallbackResult
-import com.zumin.sudoku.common.alicloud.OSSPolicy
 import com.zumin.sudoku.common.core.utils.getFromRequest
 import com.zumin.sudoku.common.core.utils.getSimpleDateStr
 import com.zumin.sudoku.common.redis.RedisUtils

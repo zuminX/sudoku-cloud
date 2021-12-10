@@ -1,6 +1,6 @@
 package com.zumin.sudoku.ums
 
-import com.zumin.sudoku.common.web.utils.encodePassword
+import com.zumin.sudoku.common.web.encodePassword
 import com.zumin.sudoku.ums.pojo.*
 
 /**
@@ -9,7 +9,7 @@ import com.zumin.sudoku.ums.pojo.*
  * @return 用户显示层对象
  */
 fun SysUser.toUserVO(): UserVO {
-  return UserVO(id, username, nickname, avatar, roleList)
+  return UserVO(id!!, username, nickname, avatar, roleList)
 }
 
 /**
@@ -18,7 +18,7 @@ fun SysUser.toUserVO(): UserVO {
  * @return 传输层对象
  */
 fun SysUser.toUserDTO(): UserDTO {
-  return UserDTO(id, username, password, enabled, roleList?.mapNotNull { it.id })
+  return UserDTO(id!!, username, password, enabled, roleList.map { it.id!! })
 }
 
 /**
@@ -27,7 +27,7 @@ fun SysUser.toUserDTO(): UserDTO {
  * @return 用户详情显示层对象
  */
 fun SysUser.toUserDetailVO(): UserDetailVO {
-  return UserDetailVO(id, username, nickname, createTime, recentLoginTime, enabled, roleList)
+  return UserDetailVO(id!!, username, nickname, createTime, recentLoginTime, enabled, roleList)
 }
 
 /**
@@ -36,14 +36,14 @@ fun SysUser.toUserDetailVO(): UserDetailVO {
  * @return 用户表对应的对象
  */
 fun AddUserBody.toSysUser(): SysUser {
-  val result = SysUser()
-  result.username = username
-  result.password = password.encodePassword()
-  result.nickname = nickname
-  result.createTime = createTime
-  result.recentLoginTime = recentLoginTime
-  result.enabled = enabled
-  return result
+  return SysUser(
+    username = username,
+    password = password.encodePassword(),
+    nickname = nickname,
+    createTime = createTime,
+    recentLoginTime = recentLoginTime,
+    enabled = enabled
+  )
 }
 
 /**
@@ -52,9 +52,9 @@ fun AddUserBody.toSysUser(): SysUser {
  * @return 用户表对应的对象
  */
 fun RegisterUserBody.toSysUser(): SysUser {
-  val result = SysUser()
-  result.username = username.trim()
-  result.password = password.encodePassword()
-  result.nickname = nickname
-  return result
+  return SysUser(
+    username = username.trim(),
+    password = password.encodePassword(),
+    nickname = nickname
+  )
 }

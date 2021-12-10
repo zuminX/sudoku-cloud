@@ -1,4 +1,4 @@
-package com.zumin.sudoku.common.web.enums
+package com.zumin.sudoku.common.web.statistics
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -18,7 +18,7 @@ enum class StatisticsDate(
      * @param amountToAdd 天数
      * @return 给定日期增加指定天数后的日期
      */
-    override fun plus(date: LocalDate, amountToAdd: Long) = date.plusDays(amountToAdd)
+    override fun plus(date: LocalDate, amountToAdd: Long): LocalDate = date.plusDays(amountToAdd)
 
     /**
      * 获取该日的第一天
@@ -36,7 +36,7 @@ enum class StatisticsDate(
      * @param amountToAdd 月数
      * @return 给定日期增加指定月数后的日期
      */
-    override fun plus(date: LocalDate, amountToAdd: Long) = date.plusMonths(amountToAdd)
+    override fun plus(date: LocalDate, amountToAdd: Long): LocalDate = date.plusMonths(amountToAdd)
 
     /**
      * 获取该月的第一天
@@ -44,7 +44,7 @@ enum class StatisticsDate(
      * @param date 日期
      * @return 该月的第一天
      */
-    override fun getFirst(date: LocalDate) = date.with(TemporalAdjusters.firstDayOfMonth())
+    override fun getFirst(date: LocalDate): LocalDate = date.with(TemporalAdjusters.firstDayOfMonth())
   },
   EACH_QUARTER("季度") {
     /**
@@ -54,7 +54,7 @@ enum class StatisticsDate(
      * @param amountToAdd 季度数
      * @return 给定日期增加指定季度数后的日期
      */
-    override fun plus(date: LocalDate, amountToAdd: Long) = date.plusMonths(4 * amountToAdd)
+    override fun plus(date: LocalDate, amountToAdd: Long): LocalDate = date.plusMonths(4 * amountToAdd)
 
     /**
      * 获取该季度的第一天
@@ -62,7 +62,7 @@ enum class StatisticsDate(
      * @param date 日期
      * @return 该季度的第一天
      */
-    override fun getFirst(date: LocalDate) = LocalDate.of(date.year, date.month.firstMonthOfQuarter(), 1)
+    override fun getFirst(date: LocalDate): LocalDate = LocalDate.of(date.year, date.month.firstMonthOfQuarter(), 1)
   },
   EACH_YEAR("年") {
     /**
@@ -72,7 +72,7 @@ enum class StatisticsDate(
      * @param amountToAdd 年数
      * @return 给定日期增加指定年数后的日期
      */
-    override fun plus(date: LocalDate, amountToAdd: Long) = date.plusYears(amountToAdd)
+    override fun plus(date: LocalDate, amountToAdd: Long): LocalDate = date.plusYears(amountToAdd)
 
     /**
      * 获取该年的第一天
@@ -80,7 +80,7 @@ enum class StatisticsDate(
      * @param date 日期
      * @return 该年的第一天
      */
-    override fun getFirst(date: LocalDate) = date.with(TemporalAdjusters.firstDayOfYear())
+    override fun getFirst(date: LocalDate): LocalDate = date.with(TemporalAdjusters.firstDayOfYear())
   };
 }
 

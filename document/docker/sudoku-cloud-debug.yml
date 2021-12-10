@@ -6,8 +6,8 @@ services:
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5002
     ports:
-      - 8000:8000
-      - 5002:5002
+      - "8000:8000"
+      - "5002:5002"
     external_links:
       - mysql:db
       - nacos:nacos
@@ -20,8 +20,8 @@ services:
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5003
     ports:
-      - 8300:8300
-      - 5003:5003
+      - "8300:8300"
+      - "5003:5003"
     external_links:
       - mysql:db
       - nacos:nacos
@@ -34,8 +34,8 @@ services:
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5004
     ports:
-      - 9999:9999
-      - 5004:5004
+      - "9999:9999"
+      - "5004:5004"
     external_links:
       - mysql:db
       - nacos:nacos
@@ -49,8 +49,8 @@ services:
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     ports:
-      - 7000:7000
-      - 5005:5005
+      - "7000:7000"
+      - "5005:5005"
     external_links:
       - nacos:nacos
   sudoku-ums:
@@ -59,8 +59,8 @@ services:
     environment:
       - JAVA_TOOL_OPTIONS=-Xmx100m -Xms100m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
     ports:
-      - 8100:8100
-      - 5006:5006
+      - "8100:8100"
+      - "5006:5006"
     external_links:
       - mysql:db
       - nacos:nacos

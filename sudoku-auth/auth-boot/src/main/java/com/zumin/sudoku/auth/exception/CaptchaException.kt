@@ -11,14 +11,14 @@ class CaptchaException : BaseException {
   /**
    * 验证码异常类的无参构造方法
    */
-  constructor() : super(AuthStatusCode.CAPTCHA_ERROR) {}
+  constructor() : super(AuthStatusCode.CAPTCHA_ERROR)
 
   /**
    * 验证码异常类的构造方法
    *
    * @param statusCode 状态编码
    */
-  constructor(statusCode: StatusCode) : super(statusCode) {}
+  constructor(statusCode: StatusCode) : super(statusCode)
 
   companion object {
     private const val serialVersionUID = -2676690140146545943L

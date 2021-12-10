@@ -62,7 +62,7 @@ class GameController(
   @ApiOperation("生成数独终盘")
   @ApiImplicitParam(name = "gameLevel", value = "难度级别", dataTypeClass = Long::class, required = true)
   fun generateSudokuFinal(@RequestParam("level") gameLevel: GameLevel): GameDataBO {
-    return generateSudokuFinal(gameLevel.minEmpty!!, gameLevel.maxEmpty!!)
+    return generateSudokuFinal(gameLevel.minEmpty, gameLevel.maxEmpty)
   }
 
   /**

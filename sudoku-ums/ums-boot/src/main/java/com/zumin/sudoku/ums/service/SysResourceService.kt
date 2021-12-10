@@ -24,9 +24,9 @@ class SysResourceService(
       return
     }
     val resourceRolesMap = resources
-      .filterNot { it.roleIds.isNullOrEmpty() }
+      .filterNot { it.roleIds.isEmpty() }
       .associate {
-        val roles = it.roleIds!!.map { roleId -> "$AUTHORITY_PREFIX$roleId" }.toSet()
+        val roles = it.roleIds.map { roleId -> "$AUTHORITY_PREFIX$roleId" }.toSet()
         "${it.method}_${it.perms}" to roles
       }
     redisUtils.setMap(RESOURCE_ROLES_KEY, resourceRolesMap)

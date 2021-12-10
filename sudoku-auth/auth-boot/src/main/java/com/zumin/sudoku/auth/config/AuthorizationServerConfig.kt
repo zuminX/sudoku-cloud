@@ -51,7 +51,7 @@ class AuthorizationServerConfig(
    * 配置授权以及令牌的访问端点和令牌服务
    */
   override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
-    val tokenEnhancers = mutableListOf<TokenEnhancer>(tokenEnhancer(), jwtAccessTokenConverter())
+    val tokenEnhancers = mutableListOf(tokenEnhancer(), jwtAccessTokenConverter())
     val tokenEnhancerChain = TokenEnhancerChain().apply { setTokenEnhancers(tokenEnhancers) }
     endpoints.authenticationManager(authenticationManager)
       .accessTokenConverter(jwtAccessTokenConverter())

@@ -14,7 +14,7 @@ class SudokuSolver(
   private val row = arrayOfNulls<DLXNode>(4146)
   private val col = arrayOfNulls<DLXNode>(1074)
   private val data = Array(9) { IntArray(9) }
-  private var head: DLXNode? = null
+  private lateinit var head: DLXNode
 
   // 数独题解个数
   val solutionCount: Int
@@ -33,27 +33,27 @@ class SudokuSolver(
     val r = 730
     val c = 324
     head = DLXNode(r, c)
-    head!!.R = head
-    head!!.L = head!!.R
-    head!!.D = head!!.L
-    head!!.U = head!!.D
+    head.R = head
+    head.L = head.R
+    head.D = head.L
+    head.U = head.D
     for (i in 0 until c) {
       col[i] = DLXNode(r, i)
       col[i]!!.L = head
-      col[i]!!.R = head!!.R
-      col[i]!!.R!!.L = col[i]
-      col[i]!!.L!!.R = col[i]!!.R!!.L
-      col[i]!!.D = col[i]
+      col[i]!!.R = head.R
+      col[i]!!.R.L = col[i]!!
+      col[i]!!.L.R = col[i]!!.R.L
+      col[i]!!.D = col[i]!!
       col[i]!!.U = col[i]!!.D
       size[i] = 0
     }
     for (i in r - 1 downTo 0) {
       row[i] = DLXNode(i, c)
       row[i]!!.U = head
-      row[i]!!.D = head!!.D
-      row[i]!!.D!!.U = row[i]
-      row[i]!!.U!!.D = row[i]!!.D!!.U
-      row[i]!!.R = row[i]
+      row[i]!!.D = head.D
+      row[i]!!.D.U = row[i]!!
+      row[i]!!.U.D = row[i]!!.D.U
+      row[i]!!.R = row[i]!!
       row[i]!!.L = row[i]!!.R
     }
   }
@@ -66,14 +66,14 @@ class SudokuSolver(
    */
   private fun addNode(r: Int, c: Int) {
     val p = DLXNode(r, c)
-    p.R = row[r]
+    p.R = row[r]!!
     p.L = row[r]!!.L
-    p.R!!.L = p
-    p.L!!.R = p.R!!.L
-    p.U = col[c]
+    p.R.L = p
+    p.L.R = p.R.L
+    p.U = col[c]!!
     p.D = col[c]!!.D
-    p.D!!.U = p
-    p.U!!.D = p.D!!.U
+    p.D.U = p
+    p.U.D = p.D.U
     ++size[c]
   }
 
@@ -94,13 +94,13 @@ class SudokuSolver(
     col[c]!!.delLR()
     var C = col[c]!!.D
     while (C !== col[c]) {
-      if (C!!.c == THRESHOLD) {
+      if (C.c == THRESHOLD) {
         C = C.D
         continue
       }
       var R = C.L
       while (R !== C) {
-        if (R!!.c == THRESHOLD) {
+        if (R.c == THRESHOLD) {
           R = R.L
           continue
         }
@@ -119,14 +119,14 @@ class SudokuSolver(
     }
     var C = col[c]!!.U
     while (C !== col[c]) {
-      if (C!!.c == THRESHOLD) {
+      if (C.c == THRESHOLD) {
         C = C.U
         continue
       }
       C.resumeLR()
       var R = C.R
       while (R !== C) {
-        if (R!!.c == THRESHOLD) {
+        if (R.c == THRESHOLD) {
           R = R.R
           continue
         }
@@ -140,7 +140,7 @@ class SudokuSolver(
   }
 
   private fun solve(depth: Int): Boolean {
-    if (head!!.L === head) {
+    if (head.L === head) {
       val solution = Array(9) { IntArray(9) }
       for (i in 0..8) {
         System.arraycopy(data[i], 0, solution[i], 0, 9)
@@ -150,9 +150,9 @@ class SudokuSolver(
     }
     var minSize = 1 shl 30
     var c = -1
-    var p = head!!.L
+    var p = head.L
     while (p !== head) {
-      if (size[p!!.c] < minSize) {
+      if (size[p.c] < minSize) {
         minSize = size[p.c]
         c = p.c
       }
@@ -161,25 +161,25 @@ class SudokuSolver(
     cover(c)
     p = col[c]!!.D
     while (p !== col[c]) {
-      p!!.R!!.L = p
+      p.R.L = p
       var cell = p.L
       while (cell !== p) {
-        cover(cell!!.c)
+        cover(cell.c)
         cell = cell.L
       }
-      p.R!!.L = p.L
+      p.R.L = p.L
       val rr = p.r - 1
       data[rr / (9 * 9)][rr / 9 % 9] = rr % 9 + 1
       if (solve(depth + 1)) {
         return true
       }
-      p.L!!.R = p
+      p.L.R = p
       cell = p.R
       while (cell !== p) {
-        resume(cell!!.c)
+        resume(cell.c)
         cell = cell.R
       }
-      p.L!!.R = p.R
+      p.L.R = p.R
       p = p.D
     }
     resume(c)
@@ -207,28 +207,28 @@ class SudokuSolver(
   }
 
   private class DLXNode(val r: Int, val c: Int) {
-    var U: DLXNode? = null
-    var D: DLXNode? = null
-    var L: DLXNode? = null
-    var R: DLXNode? = null
+    lateinit var U: DLXNode
+    lateinit var D: DLXNode
+    lateinit var L: DLXNode
+    lateinit var R: DLXNode
     fun delLR() {
-      L!!.R = R
-      R!!.L = L
+      L.R = R
+      R.L = L
     }
 
     fun delUD() {
-      U!!.D = D
-      D!!.U = U
+      U.D = D
+      D.U = U
     }
 
     fun resumeLR() {
-      R!!.L = this
-      L!!.R = R!!.L
+      R.L = this
+      L.R = R.L
     }
 
     fun resumeUD() {
-      D!!.U = this
-      U!!.D = D!!.U
+      D.U = this
+      U.D = D.U
     }
   }
 }

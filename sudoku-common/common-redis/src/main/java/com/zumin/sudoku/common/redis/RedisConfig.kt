@@ -146,7 +146,7 @@ class RedisConfig(private val coreUtils: CoreUtils) {
   /**
    * Key生成器的模板方法
    *
-   * @param 将参数转化为字符串的方法
+   * @param parameterToString 将参数转化为字符串的方法
    * @return Key生成器对象
    */
   private fun getKeyGenerator(parameterToString: (parameter: Array<Any>) -> String): KeyGenerator {

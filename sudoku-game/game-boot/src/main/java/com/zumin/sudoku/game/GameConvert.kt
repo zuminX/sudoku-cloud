@@ -12,7 +12,7 @@ import com.zumin.sudoku.game.utils.unzipToMatrix
  * @return 数独等级显示对象
  */
 fun GameLevel.toGameLevelVO(): GameLevelVO {
-  return GameLevelVO(id, name, sort)
+  return GameLevelVO(id!!, name, sort)
 }
 
 /**
@@ -30,16 +30,16 @@ fun GameNormalRecordResultForHistory.toGameNormalRecordVO(): GameNormalRecordVO 
  * @param userId          创建者ID
  * @return 竞赛信息表对应的实体类对象
  */
-fun GameRaceInformationBody.toGameRaceInformation(userId: Long? = null): GameRaceInformation {
-  val result = GameRaceInformation()
-  result.title = title
-  result.description = description
-  result.matrix = matrix.compression()
-  result.holes = holes.compression()
-  result.startTime = raceTimeRange.start
-  result.endTime = raceTimeRange.end
-  result.userId = userId
-  return result
+fun GameRaceInformationBody.toGameRaceInformation(userId: Long): GameRaceInformation {
+  return GameRaceInformation(
+    title = title,
+    description = description,
+    matrix = matrix.compression(),
+    holes = holes.compression(),
+    startTime = raceTimeRange.start!!,
+    endTime = raceTimeRange.end!!,
+    userId = userId
+  )
 }
 
 /**
@@ -49,14 +49,14 @@ fun GameRaceInformationBody.toGameRaceInformation(userId: Long? = null): GameRac
  * @return 数独记录表对应的实体类对象
  */
 fun GameRecordBO.toGameRecord(): GameRecord {
-  val result = GameRecord()
-  result.id = id
-  result.matrix = gameData?.matrix.compression()
-  result.holes = gameData?.holes.compression()
-  result.startTime = startTime
-  result.endTime = endTime
-  result.levelId = levelId
-  return result
+  return GameRecord(
+    id = id,
+    matrix = gameData.matrix.compression(),
+    holes = gameData.holes.compression(),
+    startTime = startTime,
+    endTime = endTime,
+    levelId = levelId
+  )
 }
 
 /**
@@ -65,13 +65,13 @@ fun GameRecordBO.toGameRecord(): GameRecord {
  * @return 数独记录对象
  */
 fun GameRaceInformationBody.toGameRecord(): GameRecord {
-  val result = GameRecord()
-  result.matrix = matrix.compression()
-  result.holes = holes.compression()
-  result.startTime = raceTimeRange.start
-  result.endTime = raceTimeRange.end
-  result.levelId = levelId
-  return result
+  return GameRecord(
+    matrix = matrix.compression(),
+    holes = holes.compression(),
+    startTime = raceTimeRange.start!!,
+    endTime = raceTimeRange.end,
+    levelId = levelId
+  )
 }
 
 /**

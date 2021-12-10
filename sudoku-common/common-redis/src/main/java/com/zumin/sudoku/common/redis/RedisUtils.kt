@@ -19,8 +19,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key 缓存的键值
    * @return 若存在则返回true，否则返回false
    */
-  fun has(key: String?): Boolean {
-    return !key.isNullOrBlank() && redisTemplate.hasKey(key)
+  fun has(key: String): Boolean {
+    return redisTemplate.hasKey(key)
   }
 
   /**
@@ -30,9 +30,6 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param value 缓存的值
    */
   fun <T> set(key: String, value: T) {
-    if (isKeyValueNull<T>(key, value)) {
-      return
-    }
     redisTemplate.opsForValue().set(key, value!!)
   }
 
@@ -45,20 +42,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param timeUnit 时间颗粒度
    */
   fun <T> set(key: String, value: T, timeout: Long, timeUnit: TimeUnit) {
-    if (isKeyValueNull<T>(key, value)) {
-      return
-    }
     redisTemplate.opsForValue().set(key, value!!, timeout, timeUnit)
-  }
-
-  /**
-   * 获得缓存对象
-   *
-   * @param key 缓存键值
-   * @return 缓存键值对应的数据
-   */
-  fun <T> get(key: String): T? {
-    return get(key, Any::class.java) as T?
   }
 
   /**
@@ -68,11 +52,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param clazz 数据类型
    * @return 缓存键值对应的数据
    */
-  fun <T> get(key: String?, clazz: Class<T>): T? {
-    if (key.isNullOrBlank()) {
-      return null
-    }
-    val result = redisTemplate.opsForValue()[key]
+  fun <T> get(key: String, clazz: Class<*> = Any::class.java): T? {
+    val result = redisTemplate.opsForValue().get(key)
     if (clazz == Long::class.java && result is Int) {
       return result.toString().toLong() as T
     }
@@ -84,21 +65,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    *
    * @param key 缓存键值
    */
-  fun delete(key: String?) {
-    if (key.isNullOrBlank()) {
-      return
-    }
+  fun delete(key: String) {
     redisTemplate.delete(key)
-  }
-
-  /**
-   * 获得缓存对象，并删除该缓存键
-   *
-   * @param key 缓存键值
-   * @return 缓存键值对应的数据
-   */
-  fun <T> getAndDelete(key: String): T {
-    return getAndDelete(key, Any::class.java) as T
   }
 
   /**
@@ -108,8 +76,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param clazz 数据类型
    * @return 缓存键值对应的数据
    */
-  fun <T> getAndDelete(key: String, clazz: Class<T>): T? {
-    val result: T? = get(key, clazz)
+  fun <T> getAndDelete(key: String, clazz: Class<*> = Any::class.java): T? {
+    val result = get<T>(key, clazz)
     delete(key)
     return result
   }
@@ -130,9 +98,6 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param dataList 待缓存的List数据
    */
   fun setList(key: String, vararg dataList: Any) {
-    if (isKeyCollectionNull(key, dataList.toList())) {
-      return
-    }
     redisTemplate.opsForList().leftPushAll(key, dataList)
   }
 
@@ -142,12 +107,12 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key 缓存的键值
    * @return 缓存键值对应的数据
    */
-  fun <T> getList(key: String?): List<T?> {
-    if (key.isNullOrBlank()) {
+  fun <T> getList(key: String): List<T?> {
+    val listOperation = redisTemplate.opsForList() as ListOperations<String, T>
+    val size = listOperation.size(key)!!
+    if (size == 0L) {
       return emptyList()
     }
-    val listOperation = redisTemplate.opsForList() as ListOperations<String, T>
-    val size = listOperation.size(key) ?: return listOf()
     return (0 until size).map { listOperation.index(key, it) }
   }
 
@@ -158,9 +123,6 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param dataSet 缓存的数据
    */
   fun setSet(key: String, dataSet: Set<Any>) {
-    if (isKeyCollectionNull(key, dataSet)) {
-      return
-    }
     val setOperation = redisTemplate.boundSetOps(key)
     dataSet.forEach { setOperation.add(it) }
   }
@@ -171,12 +133,9 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key 缓存键值
    * @return 缓存键值对应的数据
    */
-  fun <T> getSet(key: String?): Set<T>? {
-    if (key.isNullOrBlank()) {
-      return emptySet()
-    }
+  fun <T> getSet(key: String): Set<T> {
     val operation = redisTemplate.boundSetOps(key) as BoundSetOperations<String, T>
-    return operation.members()
+    return operation.members() as Set<T>
   }
 
   /**
@@ -185,12 +144,9 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key    缓存键值
    * @param tuples 值-分数对集合
    */
-  fun setZSet(key: String?, tuples: Set<TypedTuple<*>?>?) {
-    if (key.isNullOrBlank() || tuples == null) {
-      return
-    }
+  fun setZSet(key: String, tuples: Set<TypedTuple<*>>) {
     delete(key)
-    redisTemplate.boundZSetOps(key).add(tuples as Set<TypedTuple<Any>>)
+    redisTemplate.boundZSetOps(key).add(tuples as MutableSet<TypedTuple<Any>>)
   }
 
   /**
@@ -201,9 +157,6 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param score 分数
    */
   fun addZSet(key: String, value: Any, score: Double) {
-    if (isKeyValueNull(key, value)) {
-      return
-    }
     redisTemplate.boundZSetOps(key).add(value, score)
   }
 
@@ -214,10 +167,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param tuple 值-分数对
    */
   fun addZSet(key: String, tuple: TypedTuple<*>) {
-    if (isKeyValueNull(key, tuple)) {
-      return
-    }
-    redisTemplate.boundZSetOps(key).add(setOf(tuple as TypedTuple<Any>))
+    redisTemplate.boundZSetOps(key).add(setOf(tuple) as MutableSet<TypedTuple<Any>>)
   }
 
   /**
@@ -226,7 +176,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key 缓存键值
    * @return 缓存键值对应的数据
    */
-  fun <T> getZSet(key: String): Set<T>? {
+  fun <T> getZSet(key: String): Set<T?> {
     return getZSetByRange(key, 0, -1)
   }
 
@@ -238,11 +188,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param end   结束下标
    * @return 缓存键值对应的数据
    */
-  fun <T> getZSetByRange(key: String?, start: Long, end: Long): Set<T>? {
-    if (key.isNullOrBlank()) {
-      return emptySet()
-    }
-    return redisTemplate.boundZSetOps(key).range(start, end) as Set<T>?
+  fun <T> getZSetByRange(key: String, start: Long, end: Long): Set<T> {
+    return redisTemplate.boundZSetOps(key).range(start, end) as Set<T>
   }
 
   /**
@@ -253,11 +200,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param end   结束下标
    * @return 缓存键值对应的数据
    */
-  fun <T> getZSetByRangeWithScores(key: String?, start: Long, end: Long): Set<TypedTuple<T>>? {
-    if (key.isNullOrBlank()) {
-      return emptySet()
-    }
-    return redisTemplate.boundZSetOps(key).rangeWithScores(start, end) as Set<TypedTuple<T>>?
+  fun <T> getZSetByRangeWithScores(key: String, start: Long, end: Long): Set<TypedTuple<T>> {
+    return redisTemplate.boundZSetOps(key).rangeWithScores(start, end) as Set<TypedTuple<T>>
   }
 
   /**
@@ -267,10 +211,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param value 值
    * @return 排名
    */
-  fun getZSetRank(key: String?, value: Any): Long? {
-    if (key.isNullOrBlank()) {
-      return null
-    }
+  fun getZSetRank(key: String, value: Any): Long? {
     return redisTemplate.boundZSetOps(key).rank(value)
   }
 
@@ -280,11 +221,8 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key 缓存键值
    * @return 集合的大小
    */
-  fun getZSetSize(key: String?): Long? {
-    if (key.isNullOrBlank()) {
-      return null
-    }
-    return redisTemplate.boundZSetOps(key).size()
+  fun getZSetSize(key: String): Long {
+    return redisTemplate.boundZSetOps(key).size()!!
   }
 
   /**
@@ -294,10 +232,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param start 起始下标
    * @param end   结束下标
    */
-  fun removeZSetByRange(key: String?, start: Long, end: Long) {
-    if (key.isNullOrBlank()) {
-      return
-    }
+  fun removeZSetByRange(key: String, start: Long, end: Long) {
     redisTemplate.boundZSetOps(key).removeRange(start, end)
   }
 
@@ -308,10 +243,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param min 最小值
    * @param max 最大值
    */
-  fun removeZSetByScoreRange(key: String?, min: Double, max: Double) {
-    if (key.isNullOrBlank()) {
-      return
-    }
+  fun removeZSetByScoreRange(key: String, min: Double, max: Double) {
     redisTemplate.boundZSetOps(key).removeRangeByScore(min, max)
   }
 
@@ -321,10 +253,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key     缓存键值
    * @param dataMap 缓存的数据
    */
-  fun <T, V> setMap(key: String?, dataMap: Map<T, V>?) {
-    if (key.isNullOrBlank() || dataMap == null) {
-      return
-    }
+  fun <T, V> setMap(key: String, dataMap: Map<T, V>) {
     redisTemplate.opsForHash<T, V>().putAll(key, dataMap)
   }
 
@@ -335,17 +264,11 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param mapKey   缓存的数据的键
    * @param mapValue 缓存的数据的值
    */
-  fun <T, V> addMap(redisKey: String?, mapKey: T?, mapValue: V?) {
-    if (redisKey.isNullOrBlank() || mapKey == null || mapValue == null) {
-      return
-    }
+  fun <T, V> addMap(redisKey: String, mapKey: T, mapValue: V) {
     redisTemplate.opsForHash<T, V>().put(redisKey, mapKey, mapValue)
   }
 
-  fun <T, V> removeMap(redisKey: String?, vararg mapKeys: Any?) {
-    if (redisKey.isNullOrBlank()) {
-      return
-    }
+  fun <T, V> removeMap(redisKey: String, vararg mapKeys: Any) {
     redisTemplate.opsForHash<T, V>().delete(redisKey, *mapKeys)
   }
 
@@ -355,10 +278,7 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    * @param key 缓存键值
    * @return 缓存键值对应的数据
    */
-  fun <T> getMap(key: String?): Map<String, T> {
-    if (key.isNullOrBlank()) {
-      return emptyMap()
-    }
+  fun <T> getMap(key: String): Map<String, T> {
     return redisTemplate.opsForHash<String, T>().entries(key)
   }
 
@@ -370,28 +290,5 @@ class RedisUtils(private val redisTemplate: RedisTemplate<String, Any>) {
    */
   fun keys(pattern: String): Collection<String> {
     return redisTemplate.keys(pattern)
-  }
-
-  /**
-   * 判断键值和数据是否为空
-   *
-   * @param key   键值
-   * @param value 数据
-   * @param <T>   数据类型
-   * @return 有一为空返回true，否则返回false
-  </T> */
-  private fun <T> isKeyValueNull(key: String?, value: T?): Boolean {
-    return key.isNullOrBlank() || value == null
-  }
-
-  /**
-   * 判断键值和集合数据是否为空
-   *
-   * @param key        键值
-   * @param collection 集合数据
-   * @return 有一为空返回true，否则返回false
-   */
-  private fun isKeyCollectionNull(key: String?, collection: Collection<*>?): Boolean {
-    return key.isNullOrBlank() || collection.isNullOrEmpty()
   }
 }

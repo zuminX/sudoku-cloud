@@ -36,7 +36,7 @@ class GameRecordService(
   @Transactional
   fun updateNowGameEndTime() {
     val gameRecord = gameUtils.getGameRecord()!!
-    val wrapper = KtUpdateWrapper(GameRecord())
+    val wrapper = KtUpdateWrapper(GameRecord::class.java)
       .set(GameRecord::endTime, gameRecord.endTime)
       .eq(GameRecord::id, gameRecord.id)
     update(wrapper)

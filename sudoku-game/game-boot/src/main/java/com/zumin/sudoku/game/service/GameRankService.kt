@@ -3,17 +3,13 @@ package com.zumin.sudoku.game.service
 import com.zumin.sudoku.common.mybatis.page.Page
 import com.zumin.sudoku.common.mybatis.page.PageInformation
 import com.zumin.sudoku.common.redis.RedisUtils
-import com.zumin.sudoku.common.web.utils.getCurrentUsername
+import com.zumin.sudoku.common.web.getCurrentUsername
 import com.zumin.sudoku.game.pojo.GameLevel
 import com.zumin.sudoku.game.pojo.RankItemBO
 import com.zumin.sudoku.game.pojo.RankItemDataBO
 import com.zumin.sudoku.game.rank.RankingType
 import com.zumin.sudoku.game.rank.TypedTupleToRankItem
-import org.springframework.data.redis.core.ZSetOperations
 import org.springframework.stereotype.Service
-import java.util.*
-import java.util.function.Function
-import java.util.stream.Collectors
 
 // 排行榜人数
 private const val RANKING_NUMBER = 10000L
@@ -116,7 +112,7 @@ class GameRankService(
   private fun getRankingData(rankingKey: String, callback: TypedTupleToRankItem, page: Int, pageSize: Int): List<RankItemDataBO> {
     val start = (page - 1L) * pageSize
     val end = start + pageSize - 1
-    val rangeWithScores = redisUtils.getZSetByRangeWithScores<String>(rankingKey, start, end)!!
+    val rangeWithScores = redisUtils.getZSetByRangeWithScores<String>(rankingKey, start, end)
     return rangeWithScores.map(callback)
   }
 
@@ -130,7 +126,7 @@ class GameRankService(
    * @return 排行项数据列表的分页信息
    */
   private fun transformToPage(page: Int, pageSize: Int, rankingKey: String, data: List<RankItemDataBO>): Page<RankItemDataBO> {
-    val numberOfRanks = redisUtils.getZSetSize(rankingKey)!!.toInt()
+    val numberOfRanks = redisUtils.getZSetSize(rankingKey).toInt()
     var totalPage = numberOfRanks / pageSize
     if (numberOfRanks % pageSize != 0) {
       ++totalPage

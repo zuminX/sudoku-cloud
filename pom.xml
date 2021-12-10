@@ -47,7 +47,7 @@
     <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
     <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
     <kotlin-maven-allopen.version>1.6.0</kotlin-maven-allopen.version>
-    <kotlin.version>1.6.0</kotlin.version>
+    <kotlin.version>1.6.10-RC</kotlin.version>
   </properties>
 
   <dependencies>
@@ -265,7 +265,7 @@
           <pluginOptions>
             <option>no-arg:annotation=com.zumin.sudoku.common.core.NoArg</option>
             <!-- 在合成的构造函数中调用实例初始化器 -->
-            <!-- <option>no-arg:invokeInitializers=true</option> -->
+             <option>no-arg:invokeInitializers=true</option>
           </pluginOptions>
         </configuration>
         <dependencies>
@@ -277,7 +277,7 @@
           <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-maven-noarg</artifactId>
-            <version>1.6.0</version>
+            <version>${kotlin.version}</version>
           </dependency>
         </dependencies>
       </plugin>

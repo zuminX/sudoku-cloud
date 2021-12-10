@@ -27,7 +27,7 @@ annotation class IsLocalDateRange(
 /**
  * 日期范围类的验证器类
  */
-class LocalDateRangeValidator : ConstraintValidator<IsLocalDateRange, LocalDateRange> {
+class LocalDateRangeValidator : ConstraintValidator<IsLocalDateRange, LocalDateRange?> {
   // 开始日期不能为空
   private var startDateNotNull = false
 

@@ -6,7 +6,7 @@ import com.zumin.sudoku.common.alicloud.OSSService
 import com.zumin.sudoku.common.core.code.CommonStatusCode
 import com.zumin.sudoku.common.core.exception.BaseException
 import com.zumin.sudoku.common.web.ComRestController
-import com.zumin.sudoku.common.web.utils.getCurrentUserId
+import com.zumin.sudoku.common.web.getCurrentUserId
 import com.zumin.sudoku.ums.config.ProfileProperties
 import com.zumin.sudoku.ums.service.SysUserService
 import io.swagger.annotations.ApiOperation
@@ -33,6 +33,6 @@ class ProfileController(
   fun updateAvatar() {
     val (callbackData, filePath) = ossService.resolveCallbackData(Long::class.java)
     val userId = callbackData ?: throw BaseException(CommonStatusCode.UNAUTHORIZED_ACCESS)
-    userService.updateAvatar(filePath!!, userId)
+    userService.updateAvatar(filePath, userId)
   }
 }

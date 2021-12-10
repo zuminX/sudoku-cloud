@@ -2,7 +2,7 @@ package com.zumin.sudoku.game.utils
 
 import com.zumin.sudoku.common.core.utils.deepClone
 import com.zumin.sudoku.common.redis.RedisUtils
-import com.zumin.sudoku.common.web.utils.getCurrentUserId
+import com.zumin.sudoku.common.web.getCurrentUserId
 import com.zumin.sudoku.game.enums.AnswerSituation
 import com.zumin.sudoku.game.pojo.GameDataBO
 import com.zumin.sudoku.game.pojo.GameRecordBO
@@ -63,7 +63,7 @@ class GameUtils(private val redisUtils: RedisUtils) {
    */
   private val gameRecordKey: String
     get() {
-      return "$GAME_RECORD_PREFIX${getCurrentUserId()}"
+      return "$GAME_RECORD_PREFIX${getCurrentUserId()!!}"
     }
 }
 

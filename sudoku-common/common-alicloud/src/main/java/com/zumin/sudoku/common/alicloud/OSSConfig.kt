@@ -2,7 +2,6 @@ package com.zumin.sudoku.common.alicloud
 
 import com.aliyun.oss.OSS
 import com.aliyun.oss.OSSClientBuilder
-import com.zumin.sudoku.common.alicloud.AliCloudProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

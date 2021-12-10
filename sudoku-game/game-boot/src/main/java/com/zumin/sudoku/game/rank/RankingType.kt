@@ -3,11 +3,8 @@ package com.zumin.sudoku.game.rank
 import com.zumin.sudoku.game.pojo.RankItemDataBO
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import org.bouncycastle.asn1.x500.style.RFC4519Style.name
 import org.springframework.data.redis.core.DefaultTypedTuple
 import org.springframework.data.redis.core.ZSetOperations
-import java.util.*
-import java.util.stream.Collectors
 
 /**
  * 获取所有排行类型名

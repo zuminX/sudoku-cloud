@@ -8,13 +8,12 @@ import com.zumin.sudoku.common.core.auth.AUTH_CAPTCHA_CODE
 import com.zumin.sudoku.common.core.auth.AUTH_CAPTCHA_UUID
 import com.zumin.sudoku.common.core.auth.WEAPP_CLIENT_ID
 import com.zumin.sudoku.common.web.ComRestController
-import com.zumin.sudoku.common.web.utils.getAuthClientId
+import com.zumin.sudoku.common.web.getAuthClientId
 import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiImplicitParams
 import io.swagger.annotations.ApiOperation
 import org.springframework.security.oauth2.common.OAuth2AccessToken
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint
-import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import springfox.documentation.annotations.ApiIgnore

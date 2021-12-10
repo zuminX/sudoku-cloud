@@ -2,7 +2,6 @@ package com.zumin.sudoku.common.web.handler
 
 import com.zumin.sudoku.common.web.domain.CustomEditorInfo
 import org.springframework.web.bind.WebDataBinder
-import java.util.function.Consumer
 
 /**
  * 数据绑定处理器接口

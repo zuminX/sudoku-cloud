@@ -6,7 +6,6 @@ import com.zumin.sudoku.game.validator.IsSudokuMatrix
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.hibernate.validator.constraints.Length
-import java.io.Serializable
 
 @ApiModel("竞赛内容信息体类")
 data class GameRaceInformationBody(
@@ -27,8 +26,4 @@ data class GameRaceInformationBody(
   val raceTimeRange: LocalDateTimeRange,
   @ApiModelProperty("数独难度ID")
   val levelId: Long? = null,
-) : Serializable {
-  companion object {
-    private const val serialVersionUID = 9008509762495627768L
-  }
-}
+)

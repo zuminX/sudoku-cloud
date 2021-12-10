@@ -1,6 +1,5 @@
 package com.zumin.sudoku.common.core.exception
 
-import com.zumin.sudoku.common.core.exception.BaseException
 import com.zumin.sudoku.common.core.code.CommonStatusCode
 
 /**

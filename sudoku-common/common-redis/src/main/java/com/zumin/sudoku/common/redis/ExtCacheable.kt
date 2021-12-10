@@ -1,6 +1,5 @@
 package com.zumin.sudoku.common.redis
 
-import cn.hutool.core.util.ArrayUtil
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.core.annotation.AliasFor
 import java.lang.annotation.Inherited

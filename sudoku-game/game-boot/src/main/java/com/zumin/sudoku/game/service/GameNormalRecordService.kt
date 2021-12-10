@@ -6,7 +6,7 @@ import com.zumin.sudoku.common.core.utils.compression
 import com.zumin.sudoku.common.mybatis.page.Page
 import com.zumin.sudoku.common.mybatis.page.PageParam
 import com.zumin.sudoku.common.mybatis.page.getPageData
-import com.zumin.sudoku.common.web.utils.getCurrentUserId
+import com.zumin.sudoku.common.web.getCurrentUserId
 import com.zumin.sudoku.game.enums.AnswerSituation
 import com.zumin.sudoku.game.mapper.GameNormalRecordMapper
 import com.zumin.sudoku.game.pojo.*
@@ -29,7 +29,7 @@ class GameNormalRecordService(
    */
   @Transactional
   fun updateNowGame(inputMatrix: List<List<Int?>>, answerSituation: AnswerSituation) {
-    val wrapper = KtUpdateWrapper(GameNormalRecord())
+    val wrapper = KtUpdateWrapper(GameNormalRecord::class.java)
       .set(GameNormalRecord::answer, inputMatrix.compression())
       .set(GameNormalRecord::situation, answerSituation.code)
       .eq(GameNormalRecord::recordId, gameUtils.getGameRecord()!!.id)
@@ -41,13 +41,12 @@ class GameNormalRecordService(
    */
   @Transactional
   fun saveNowGame() {
-    val gameNormalRecord = GameNormalRecord().apply {
-      val gameRecord = gameUtils.getGameRecord()!!
-      userId = getCurrentUserId()
-      answer = gameRecord.gameData.hideVacancyGrid().matrix.compression()
-      recordId = gameRecord.id
-    }
-    save(gameNormalRecord)
+    val gameRecord = gameUtils.getGameRecord()!!
+    save(GameNormalRecord(
+      userId = getCurrentUserId()!!,
+      answer = gameRecord.gameData.hideVacancyGrid().matrix.compression(),
+      recordId = gameRecord.id!!
+    ))
   }
 
   fun listAverageSpendTimeRankData(limitNumber: Long): List<RankItemBO> {
@@ -68,7 +67,7 @@ class GameNormalRecordService(
    * @param userId 用户ID
    * @return 用户游戏信息列表
    */
-  fun listUserGameInformation(userId: Long = getCurrentUserId()): List<UserGameInformationVO> {
+  fun listUserGameInformation(userId: Long = getCurrentUserId()!!): List<UserGameInformationVO> {
     return baseMapper.selectGameInformationByUserId(userId)
   }
 
@@ -78,7 +77,7 @@ class GameNormalRecordService(
    * @return 游戏记录的分页信息
    */
   fun getHistoryGameRecord(): Page<GameNormalRecordVO> {
-    val userId = getCurrentUserId()
+    val userId = getCurrentUserId()!!
     if (!gameUtils.isRecord()) {
       return getHistoryGameRecordById(userId)
     }
