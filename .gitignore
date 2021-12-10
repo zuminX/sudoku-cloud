@@ -7,3 +7,6 @@
 /sudoku-game/game-api/target/
 /sudoku-ums/ums-api/target/
 .idea
+
+# --- JRebel
+/**/rebel.xml

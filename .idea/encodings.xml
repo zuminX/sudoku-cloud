@@ -1,23 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/sudoku-admin/admin-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/sudoku-admin/admin-boot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-auth/auth-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-auth/auth-api/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-auth/auth-boot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-auth/auth-boot/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-auth/auth-boot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-auth/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/common-alicloud/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/common-alicloud/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-common/common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/common-core/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-common/common-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-common/common-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/common-mybatis/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-common/common-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/common-redis/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-common/common-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/common-web/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-game/game-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-game/game-api/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-game/game-boot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-game/game-boot/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-game/game-boot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-game/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-game/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-game/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-gateway/src/main/kotlin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sudoku-gateway/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/sudoku-user/user-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/sudoku-user/user-boot/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/sudoku-user/user-boot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-monitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-monitor/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-monitor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/ums-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/ums-api/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/ums-boot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/ums-boot/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sudoku-ums/ums-boot/src/main/resources" charset="UTF-8" />
   </component>
 </project>

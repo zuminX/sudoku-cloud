@@ -35,22 +35,19 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
     <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
-    <mapstruct.version>1.5.0.Beta1</mapstruct.version>
-    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
-    <lombok.version>1.18.22</lombok.version>
     <knife4j-micro.version>2.0.4</knife4j-micro.version>
     <knife4j.version>2.0.8</knife4j.version>
-    <hutool.version>5.4.3</hutool.version>
+    <hutool.version>5.7.16</hutool.version>
     <maven-compiler.version>3.8.1</maven-compiler.version>
     <xxl-job-core.version>2.2.0</xxl-job-core.version>
-    <powermock.version>2.0.2</powermock.version>
-    <junit.version>4.13.1</junit.version>
     <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     <admin-starter-server.version>2.2.3</admin-starter-server.version>
-    <mockito-core.version>3.6.0</mockito-core.version>
+    <mockito-core.version>4.1.0</mockito-core.version>
     <spring-boot-maven-plugin.version>2.3.3.RELEASE</spring-boot-maven-plugin.version>
     <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
     <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+    <kotlin-maven-allopen.version>1.6.0</kotlin-maven-allopen.version>
+    <kotlin.version>1.6.0</kotlin.version>
   </properties>
 
   <dependencies>
@@ -80,14 +77,6 @@
       </exclusions>
     </dependency>
 
-    <!-- Junit 4 -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-
     <!-- Mockito 核心 -->
     <dependency>
       <groupId>org.mockito</groupId>
@@ -96,33 +85,32 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- PowerMockito -->
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <version>${powermock.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito2</artifactId>
-      <version>${powermock.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- lombok 注解插件 -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- hutool 工具集-->
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
       <version>${hutool.version}</version>
+    </dependency>
+
+    <!-- Kotlin -->
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-kotlin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-test-junit</artifactId>
+      <version>${kotlin.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -219,19 +207,6 @@
         <version>${hutool.version}</version>
       </dependency>
 
-      <!-- 类型转换工具 -->
-      <dependency>
-        <groupId>org.mapstruct</groupId>
-        <artifactId>mapstruct</artifactId>
-        <version>${mapstruct.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok-mapstruct-binding</artifactId>
-        <version>${lombok-mapstruct-binding.version}</version>
-      </dependency>
-
       <!-- xxl-job 任务调度平台 -->
       <dependency>
         <groupId>com.xuxueli</groupId>
@@ -256,6 +231,57 @@
   </dependencyManagement>
 
   <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmTarget>${java.version}</jvmTarget>
+          <args>
+            <arg>-Xjsr305=strict</arg>
+            <arg>-Xjvm-default=all</arg>
+          </args>
+          <compilerPlugins>
+            <plugin>spring</plugin>
+            <plugin>no-arg</plugin>
+          </compilerPlugins>
+          <pluginOptions>
+            <option>no-arg:annotation=com.zumin.sudoku.common.core.NoArg</option>
+            <!-- 在合成的构造函数中调用实例初始化器 -->
+            <!-- <option>no-arg:invokeInitializers=true</option> -->
+          </pluginOptions>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-allopen</artifactId>
+            <version>${kotlin-maven-allopen.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-noarg</artifactId>
+            <version>1.6.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -266,26 +292,6 @@
             <source>${java.version}</source>
             <target>${java.version}</target>
             <encoding>${project.build.sourceEncoding}</encoding>
-            <annotationProcessorPaths>
-              <path>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct.version}</version>
-              </path>
-              <path>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-              </path>
-              <path>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-mapstruct-binding</artifactId>
-                <version>${lombok-mapstruct-binding.version}</version>
-              </path>
-            </annotationProcessorPaths>
-            <compilerArgs>
-              <arg>-Amapstruct.defaultComponentModel=spring</arg>
-            </compilerArgs>
           </configuration>
         </plugin>
         <plugin>
@@ -307,16 +313,12 @@
           </executions>
           <configuration>
             <imageName>sudoku/${project.artifactId}:${project.version}</imageName>
-
             <!-- 基础镜像-->
             <baseImage>openjdk:11.0.13-oraclelinux7</baseImage>
-
             <!-- 切换到容器工作目录-->
             <workdir>/</workdir>
-
             <!-- 指定远程 Docker API地址  -->
             <dockerHost>http://192.168.50.110:2375</dockerHost>
-
             <entryPoint>["java", "-jar", "-Dspring.profiles.active=dev","${project.build.finalName}.jar"]</entryPoint>
             <resources>
               <resource>

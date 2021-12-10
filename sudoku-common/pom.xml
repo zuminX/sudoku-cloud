@@ -35,6 +35,7 @@
     <jaxb-impl.version>2.3.0</jaxb-impl.version>
     <jaxb-core.version>2.3.0</jaxb-core.version>
     <activation.version>1.1.1</activation.version>
+    <kotlin-logging-jvm.version>2.0.10</kotlin-logging-jvm.version>
   </properties>
 
   <dependencyManagement>
@@ -79,6 +80,12 @@
         <artifactId>annotations</artifactId>
         <version>${jetbrains.annotations.version}</version>
         <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.microutils</groupId>
+        <artifactId>kotlin-logging-jvm</artifactId>
+        <version>${kotlin-logging-jvm.version}</version>
       </dependency>
 
       <!-- 解决部署到Linux中出现NoClassDefFoundError: javax/xml/bind/DatatypeConverter的异常 -->

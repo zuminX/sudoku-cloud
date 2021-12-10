@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zumin.sudoku.game.mapper.GameNormalRecordMapper">
-  <resultMap id="BaseResultMap" type="com.zumin.sudoku.game.pojo.entity.GameNormalRecord">
+  <resultMap id="BaseResultMap" type="com.zumin.sudoku.game.pojo.GameNormalRecord">
     <!--@mbg.generated-->
     <!--@Table game_normal_record-->
     <id column="id" jdbcType="BIGINT" property="id"/>
@@ -16,10 +16,10 @@
   </sql>
 
   <resultMap id="GameNormalRecordResultForHistoryMap"
-    type="com.zumin.sudoku.game.pojo.result.GameNormalRecordResultForHistory">
+    type="com.zumin.sudoku.game.pojo.GameNormalRecordResultForHistory">
     <result column="answer" property="answer"/>
     <result column="situation" property="situation"/>
-    <association property="gameRecordResult" javaType="com.zumin.sudoku.game.pojo.result.GameRecordResultForHistory">
+    <association property="gameRecordResult" javaType="com.zumin.sudoku.game.pojo.GameRecordResultForHistory">
       <result column="matrix" property="matrix"/>
       <result column="holes" property="holes"/>
       <result column="start_time" property="startTime"/>
@@ -69,7 +69,7 @@
     rn  <![CDATA[<=]]> ${limitNumber}
   </sql>
 
-  <select id="selectAverageSpendTimeRankLimit" resultType="com.zumin.sudoku.game.pojo.bo.RankItemBO">
+  <select id="selectAverageSpendTimeRankLimit" resultType="com.zumin.sudoku.game.pojo.RankItemBO">
     WITH game_record_merge_user as (
     <include refid="SelectGameRecordWithUser"/>
     ) ,
@@ -85,7 +85,7 @@
     <include refid="SelectRankLimit"/>
   </select>
 
-  <select id="selectMinSpendTimeRankLimit" resultType="com.zumin.sudoku.game.pojo.bo.RankItemBO">
+  <select id="selectMinSpendTimeRankLimit" resultType="com.zumin.sudoku.game.pojo.RankItemBO">
     WITH game_record_merge_user as (
     <include refid="SelectGameRecordWithUser"/>
     ) ,
@@ -100,7 +100,7 @@
     <include refid="SelectRankLimit"/>
   </select>
 
-  <select id="selectCorrectNumberRankLimit" resultType="com.zumin.sudoku.game.pojo.bo.RankItemBO">
+  <select id="selectCorrectNumberRankLimit" resultType="com.zumin.sudoku.game.pojo.RankItemBO">
     WITH game_record_merge_user as (
     <include refid="SelectGameRecordWithUser"/>
     )
@@ -117,7 +117,7 @@
     <include refid="SelectRankLimit"/>
   </select>
 
-  <select id="selectGameInformationByUserId" resultType="com.zumin.sudoku.game.pojo.vo.UserGameInformationVO">
+  <select id="selectGameInformationByUserId" resultType="com.zumin.sudoku.game.pojo.UserGameInformationVO">
     WITH game_record_merge_user as (
     <include refid="SelectGameRecordWithUser"/>
     )

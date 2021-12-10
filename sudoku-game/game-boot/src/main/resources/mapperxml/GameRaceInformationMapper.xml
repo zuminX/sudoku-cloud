@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zumin.sudoku.game.mapper.GameRaceInformationMapper">
-  <resultMap id="BaseResultMap" type="com.zumin.sudoku.game.pojo.entity.GameRaceInformation">
+  <resultMap id="BaseResultMap" type="com.zumin.sudoku.game.pojo.GameRaceInformation">
     <!--@mbg.generated-->
     <!--@Table game_race_information-->
     <id column="id" jdbcType="BIGINT" property="id"/>
@@ -18,7 +18,7 @@
     id, title, description, matrix, holes, start_time, end_time, user_id
   </sql>
 
-  <select id="selectAllByEndTimeBefore" resultType="com.zumin.sudoku.game.pojo.vo.GameRaceInformationVO">
+  <select id="selectAllByEndTimeBefore" resultType="com.zumin.sudoku.game.pojo.GameRaceInformationVO">
     select id,
            title,
            description,
